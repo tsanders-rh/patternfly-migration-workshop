@@ -51,6 +51,7 @@ The setup script verifies and helps install:
 - ✅ **npm** - Package manager (comes with Node.js)
 - ✅ **Git** - Version control
 - ✅ **Podman or Docker** - Container runtime for Konveyor analysis
+- ✅ **Kantra CLI** - Konveyor analysis tool (automatically installed)
 - ✅ **VS Code** - IDE for the workshop
 - ✅ **Konveyor Extension** - AI-assisted migration tools
 - ✅ **Workshop Repository** - Clones and sets up the demo app
@@ -82,6 +83,30 @@ If the automated script doesn't work for you, follow these manual steps:
 - Download from: https://code.visualstudio.com/
 - Verify: `code --version`
 - On Mac, enable shell command: Open VS Code → Command Palette (Cmd+Shift+P) → "Shell Command: Install 'code' command in PATH"
+
+#### Kantra CLI
+- Download the latest release for your platform from: https://github.com/konveyor/kantra/releases
+- **macOS/Linux**:
+  ```bash
+  # Download and install to ~/.local/bin
+  mkdir -p ~/.local/bin
+  curl -L -o ~/.local/bin/kantra https://github.com/konveyor/kantra/releases/download/v0.6.2/kantra-$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m | sed 's/x86_64/amd64/')
+  chmod +x ~/.local/bin/kantra
+
+  # Add to PATH (add to ~/.bashrc or ~/.zshrc)
+  export PATH="$HOME/.local/bin:$PATH"
+  ```
+- **Windows**:
+  ```powershell
+  # Download and install to AppData\Local\kantra
+  $installDir = "$env:LOCALAPPDATA\kantra"
+  New-Item -ItemType Directory -Path $installDir -Force
+  Invoke-WebRequest -Uri "https://github.com/konveyor/kantra/releases/download/v0.6.2/kantra-windows-amd64.exe" -OutFile "$installDir\kantra.exe"
+
+  # Add to PATH
+  $env:Path = "$installDir;$env:Path"
+  ```
+- Verify: `kantra version`
 
 ### 2. Clone Workshop Repository
 
@@ -148,6 +173,26 @@ You'll need an API key from one of these providers for the workshop:
 
 **Note:** You don't need to configure the API key now - we'll do that together at the start of the workshop.
 
+## Using Kantra in Hybrid Mode
+
+Kantra supports hybrid mode, which combines static analysis with AI-assisted fixes. After setup, you can run:
+
+```bash
+# Run analysis with hybrid mode (requires AI provider)
+kantra analyze \
+  --input . \
+  --rules ./rulesets/preview/nodejs/patternfly \
+  --output ./analysis-results \
+  --source patternfly-v5 \
+  --target patternfly-v6 \
+  --enable-default-rulesets=false
+
+# Or use the VS Code Konveyor extension (recommended for workshop)
+# which provides a GUI for reviewing and applying AI-generated fixes
+```
+
+**Note:** We'll configure AI providers and run kantra together during the workshop. The setup script just ensures kantra is installed and ready.
+
 ## Validation Checklist
 
 Before the workshop, verify you can do all of these:
@@ -155,6 +200,7 @@ Before the workshop, verify you can do all of these:
 - [ ] Run `node --version` and see v18.x or higher
 - [ ] Run `git --version` successfully
 - [ ] Run `podman ps` or `docker ps` successfully
+- [ ] Run `kantra version` successfully
 - [ ] Run `code --version` successfully
 - [ ] Clone the workshop repository
 - [ ] Run `npm install` without errors
@@ -187,6 +233,20 @@ Before the workshop, verify you can do all of these:
 - **Mac**: Open VS Code → Command Palette (Cmd+Shift+P) → "Shell Command: Install 'code' command in PATH"
 - **Windows**: Reinstall VS Code with "Add to PATH" option checked
 - **Linux**: Add VS Code to PATH or use full path to code binary
+
+### "'kantra' command not found" (after script install)
+- **macOS/Linux**: Add `~/.local/bin` to your PATH:
+  ```bash
+  echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+  source ~/.bashrc
+  ```
+- **Windows**: Restart PowerShell to pick up PATH changes
+- **Alternative**: Download manually from https://github.com/konveyor/kantra/releases
+
+### "Kantra fails to run analysis"
+- Ensure Docker/Podman is running: `docker ps` or `podman ps`
+- Check kantra version: `kantra version`
+- Try running with `--verbose` flag to see detailed errors
 
 ### "Tests fail" or "App won't start"
 - Ensure you're in the right directory: `cd patternfly-migration-workshop`

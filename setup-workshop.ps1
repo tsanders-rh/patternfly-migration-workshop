@@ -129,6 +129,82 @@ if (Test-CommandExists "docker") {
     Write-Host "  Install Docker Desktop from: https://docs.docker.com/desktop/install/windows-install/"
 }
 
+# Check/Install Kantra
+Print-Header "Checking Kantra CLI"
+
+$kantraVersion = "v0.6.2"
+$installDir = "$env:LOCALAPPDATA\kantra"
+
+if (Test-CommandExists "kantra") {
+    $currentKantraVersion = (kantra version 2>$null | Select-String -Pattern 'v\d+\.\d+\.\d+').Matches.Value
+    if (-not $currentKantraVersion) { $currentKantraVersion = "unknown" }
+    Print-Success "Kantra is already installed (version: $currentKantraVersion)"
+} else {
+    Write-Host "Kantra not found. Installing kantra CLI..."
+
+    # Detect architecture
+    $kantraArch = if ($env:PROCESSOR_ARCHITECTURE -eq "AMD64") { "amd64" } else { "arm64" }
+    $kantraBinary = "kantra-windows-$kantraArch.exe"
+    $downloadUrl = "https://github.com/konveyor/kantra/releases/download/$kantraVersion/$kantraBinary"
+
+    Write-Host "Downloading kantra from: $downloadUrl"
+
+    try {
+        # Create install directory if it doesn't exist
+        if (-not (Test-Path $installDir)) {
+            New-Item -ItemType Directory -Path $installDir -Force | Out-Null
+        }
+
+        $kantraPath = "$installDir\kantra.exe"
+
+        # Download kantra
+        Invoke-WebRequest -Uri $downloadUrl -OutFile $kantraPath -UseBasicParsing
+
+        # Check if install dir is in PATH
+        $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
+        if ($userPath -notlike "*$installDir*") {
+            Print-Warning "Kantra installed to $installDir but not in PATH"
+            Write-Host "  Adding $installDir to your PATH..."
+
+            # Add to user PATH
+            $newPath = "$installDir;$userPath"
+            [Environment]::SetEnvironmentVariable("Path", $newPath, "User")
+
+            # Add to current session PATH
+            $env:Path = "$installDir;$env:Path"
+
+            Write-Host "  PATH updated. You may need to restart your terminal."
+        } else {
+            # Still add to current session
+            $env:Path = "$installDir;$env:Path"
+        }
+
+        # Verify installation
+        if (Test-CommandExists "kantra") {
+            $installedVersion = (kantra version 2>$null | Select-String -Pattern 'v\d+\.\d+\.\d+').Matches.Value
+            if (-not $installedVersion) { $installedVersion = $kantraVersion }
+            Print-Success "Kantra installed successfully (version: $installedVersion)"
+        } else {
+            Print-Error "Kantra downloaded but not accessible in PATH"
+            Write-Host "  Try restarting PowerShell or manually add $installDir to PATH"
+        }
+    } catch {
+        Print-Error "Failed to download kantra: $_"
+        Write-Host "  You can manually download from: https://github.com/konveyor/kantra/releases"
+    }
+}
+
+# Test kantra if available
+if (Test-CommandExists "kantra") {
+    Write-Host "Testing kantra..."
+    try {
+        kantra version | Out-Null
+        Print-Success "Kantra is working correctly"
+    } catch {
+        Print-Warning "Kantra is installed but 'kantra version' failed"
+    }
+}
+
 # Check VS Code
 Print-Header "Checking VS Code"
 $vscodeFound = $false

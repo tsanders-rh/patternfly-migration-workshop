@@ -146,6 +146,91 @@ if [ -n "$CONTAINER_RUNTIME" ]; then
     fi
 fi
 
+# Check/Install Kantra
+print_header "Checking Kantra CLI"
+
+KANTRA_VERSION="v0.6.2"
+INSTALL_DIR="$HOME/.local/bin"
+
+if command_exists kantra; then
+    CURRENT_KANTRA_VERSION=$(kantra version 2>/dev/null | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' || echo "unknown")
+    print_success "Kantra is already installed (version: $CURRENT_KANTRA_VERSION)"
+else
+    echo "Kantra not found. Installing kantra CLI..."
+
+    # Detect architecture
+    ARCH="$(uname -m)"
+    case "${ARCH}" in
+        x86_64)  KANTRA_ARCH="amd64";;
+        aarch64) KANTRA_ARCH="arm64";;
+        arm64)   KANTRA_ARCH="arm64";;
+        *)
+            print_error "Unsupported architecture: ${ARCH}"
+            KANTRA_ARCH=""
+            ;;
+    esac
+
+    if [ -n "$KANTRA_ARCH" ]; then
+        # Determine OS for download
+        case "${MACHINE}" in
+            Mac)   KANTRA_OS="darwin";;
+            Linux) KANTRA_OS="linux";;
+            *)
+                print_error "Unsupported OS for kantra installation: ${MACHINE}"
+                KANTRA_OS=""
+                ;;
+        esac
+
+        if [ -n "$KANTRA_OS" ]; then
+            KANTRA_BINARY="kantra-${KANTRA_OS}-${KANTRA_ARCH}"
+            DOWNLOAD_URL="https://github.com/konveyor/kantra/releases/download/${KANTRA_VERSION}/${KANTRA_BINARY}"
+
+            echo "Downloading kantra from: $DOWNLOAD_URL"
+
+            # Create install directory if it doesn't exist
+            mkdir -p "$INSTALL_DIR"
+
+            # Download kantra
+            if curl -L -o "$INSTALL_DIR/kantra" "$DOWNLOAD_URL" 2>/dev/null; then
+                chmod +x "$INSTALL_DIR/kantra"
+
+                # Check if install dir is in PATH
+                if [[ ":$PATH:" != *":$INSTALL_DIR:"* ]]; then
+                    print_warning "Kantra installed to $INSTALL_DIR but not in PATH"
+                    echo "  Add to your PATH by adding this to ~/.bashrc or ~/.zshrc:"
+                    echo "  export PATH=\"\$HOME/.local/bin:\$PATH\""
+                    echo ""
+                    echo "  Then run: source ~/.bashrc (or source ~/.zshrc)"
+
+                    # Temporarily add to PATH for this script
+                    export PATH="$INSTALL_DIR:$PATH"
+                fi
+
+                # Verify installation
+                if command_exists kantra; then
+                    INSTALLED_VERSION=$(kantra version 2>/dev/null | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' || echo "$KANTRA_VERSION")
+                    print_success "Kantra installed successfully (version: $INSTALLED_VERSION)"
+                else
+                    print_error "Kantra downloaded but not accessible in PATH"
+                fi
+            else
+                print_error "Failed to download kantra"
+                echo "  You can manually download from: https://github.com/konveyor/kantra/releases"
+            fi
+        fi
+    fi
+fi
+
+# Test kantra if available
+if command_exists kantra; then
+    echo "Testing kantra..."
+    if kantra version >/dev/null 2>&1; then
+        print_success "Kantra is working correctly"
+    else
+        print_warning "Kantra is installed but 'kantra version' failed"
+    fi
+fi
+
 # Check VS Code
 print_header "Checking VS Code"
 VSCODE_FOUND=false
