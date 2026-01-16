@@ -127,7 +127,7 @@ Run Konveyor analysis the same way as main branch:
 ```bash
 kantra analyze \
   --input . \
-  --rules ./rulesets/preview/nodejs/patternfly \
+  --rules ../rulesets/preview/nodejs/patternfly \
   --output ./analysis-results \
   --source patternfly-v5 \
   --target patternfly-v6 \

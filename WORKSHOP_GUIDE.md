@@ -23,7 +23,7 @@
    ```bash
    kantra analyze \
      --input . \
-     --rules ./rulesets/preview/nodejs/patternfly \
+     --rules ../rulesets/preview/nodejs/patternfly \
      --output ./analysis-results-backup \
      --source patternfly-v5 \
      --target patternfly-v6 \
@@ -94,7 +94,7 @@ Show generated rules:
 # Run analysis on workshop app
 kantra analyze \
   --input . \
-  --rules ./rulesets/preview/nodejs/patternfly \
+  --rules ../rulesets/preview/nodejs/patternfly \
   --output ./analysis-results \
   --source patternfly-v5 \
   --target patternfly-v6 \
@@ -413,7 +413,7 @@ npm test
 # Run analysis
 kantra analyze \
   --input . \
-  --rules ./rulesets/preview/nodejs/patternfly \
+  --rules ../rulesets/preview/nodejs/patternfly \
   --output ./analysis-results \
   --source patternfly-v5 \
   --target patternfly-v6 \
@@ -437,7 +437,7 @@ npm test
 # 3. Run analysis - see ~35 violations
 kantra analyze \
   --input . \
-  --rules ./rulesets/preview/nodejs/patternfly \
+  --rules ../rulesets/preview/nodejs/patternfly \
   --output ./before-migration \
   --source patternfly-v5 \
   --target patternfly-v6 \
@@ -461,7 +461,7 @@ npm run lint
 # 4. Re-analyze - violations gone
 kantra analyze \
   --input . \
-  --rules ./rulesets/preview/nodejs/patternfly \
+  --rules ../rulesets/preview/nodejs/patternfly \
   --output ./after-migration \
   --source patternfly-v5 \
   --target patternfly-v6 \

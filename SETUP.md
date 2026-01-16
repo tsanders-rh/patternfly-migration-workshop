@@ -55,7 +55,7 @@ The setup script verifies and helps install:
 - ✅ **VS Code** - IDE for the workshop
 - ✅ **Konveyor Extension** - AI-assisted migration tools
 - ✅ **Workshop Repository** - Clones and sets up the demo app
-- ✅ **Konveyor Rulesets** - Clones PatternFly v5→v6 migration rules
+- ✅ **Konveyor Rulesets** - Clones PatternFly v5→v6 migration rules to parent directory
 - ✅ **Dependencies** - Installs all npm packages
 - ✅ **Tests** - Verifies the app works
 
@@ -182,7 +182,7 @@ Kantra supports hybrid mode, which combines static analysis with AI-assisted fix
 # Run analysis with PatternFly rules only
 kantra analyze \
   --input . \
-  --rules ./rulesets/preview/nodejs/patternfly \
+  --rules ../rulesets/preview/nodejs/patternfly \
   --output ./analysis-results \
   --source patternfly-v5 \
   --target patternfly-v6 \

@@ -276,14 +276,14 @@ if (Test-Path $workshopDir) {
     }
 }
 
-# Clone Konveyor rulesets
+# Clone Konveyor rulesets (to parent directory to avoid analyzing test data)
 Print-Header "Konveyor Rulesets Setup"
 
-$rulesetsDir = "rulesets"
+$rulesetsDir = "..\rulesets"
 $rulesetsUrl = "https://github.com/konveyor/rulesets.git"
 
 if (Test-Path $rulesetsDir) {
-    Print-Info "Rulesets directory already exists"
+    Print-Info "Rulesets directory already exists in parent directory"
     Set-Location $rulesetsDir
 
     $remoteUrl = git remote get-url origin 2>$null
@@ -300,19 +300,19 @@ if (Test-Path $rulesetsDir) {
         Set-Location ..
     } else {
         Set-Location ..
-        Print-Warning "Directory 'rulesets' exists but is not the Konveyor rulesets repository"
+        Print-Warning "Directory '..\rulesets' exists but is not the Konveyor rulesets repository"
         Write-Host "  Skipping rulesets clone. You may need to clone manually."
     }
 } else {
-    Write-Host "Cloning Konveyor rulesets repository..."
+    Write-Host "Cloning Konveyor rulesets repository to parent directory..."
     try {
-        git clone $rulesetsUrl
+        git clone $rulesetsUrl $rulesetsDir
         Print-Success "Rulesets cloned successfully"
-        Print-Info "PatternFly ruleset location: .\rulesets\preview\nodejs\patternfly"
+        Print-Info "PatternFly ruleset location: ..\rulesets\preview\nodejs\patternfly"
     } catch {
         Print-Warning "Failed to clone rulesets repository"
         Write-Host "  You can clone manually later with:"
-        Write-Host "  git clone $rulesetsUrl"
+        Write-Host "  cd .. && git clone $rulesetsUrl"
     }
 }
 
@@ -397,7 +397,7 @@ if ($script:Errors.Count -eq 0) {
     Write-Host "  npm test"
     Write-Host ""
     Write-Host "To run Konveyor analysis:"
-    Write-Host "  kantra analyze --input . --rules .\rulesets\preview\nodejs\patternfly --output .\analysis-results --source patternfly-v5 --target patternfly-v6 --enable-default-rulesets=false"
+    Write-Host "  kantra analyze --input . --rules ..\rulesets\preview\nodejs\patternfly --output .\analysis-results --source patternfly-v5 --target patternfly-v6 --enable-default-rulesets=false"
     Write-Host ""
     Write-Host "Before the workshop, please also:"
     Write-Host "  1. Get an API key from your AI provider (OpenAI, Anthropic, or setup Ollama)"

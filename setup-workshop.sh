@@ -299,14 +299,14 @@ else
     fi
 fi
 
-# Clone Konveyor rulesets
+# Clone Konveyor rulesets (to parent directory to avoid analyzing test data)
 print_header "Konveyor Rulesets Setup"
 
-RULESETS_DIR="rulesets"
+RULESETS_DIR="../rulesets"
 RULESETS_URL="https://github.com/konveyor/rulesets.git"
 
 if [ -d "$RULESETS_DIR" ]; then
-    print_info "Rulesets directory already exists"
+    print_info "Rulesets directory already exists in parent directory"
     cd "$RULESETS_DIR"
 
     if git remote get-url origin 2>/dev/null | grep -q "konveyor/rulesets"; then
@@ -318,21 +318,21 @@ if [ -d "$RULESETS_DIR" ]; then
         else
             print_warning "Could not update rulesets (may have local changes)"
         fi
-        cd ..
+        cd - > /dev/null
     else
-        cd ..
-        print_warning "Directory 'rulesets' exists but is not the Konveyor rulesets repository"
+        cd - > /dev/null
+        print_warning "Directory '../rulesets' exists but is not the Konveyor rulesets repository"
         echo "  Skipping rulesets clone. You may need to clone manually."
     fi
 else
-    echo "Cloning Konveyor rulesets repository..."
-    if git clone "$RULESETS_URL"; then
+    echo "Cloning Konveyor rulesets repository to parent directory..."
+    if git clone "$RULESETS_URL" "$RULESETS_DIR"; then
         print_success "Rulesets cloned successfully"
-        print_info "PatternFly ruleset location: ./rulesets/preview/nodejs/patternfly"
+        print_info "PatternFly ruleset location: ../rulesets/preview/nodejs/patternfly"
     else
         print_warning "Failed to clone rulesets repository"
         echo "  You can clone manually later with:"
-        echo "  git clone $RULESETS_URL"
+        echo "  cd .. && git clone $RULESETS_URL"
     fi
 fi
 
@@ -414,7 +414,7 @@ if [ ${#ERRORS[@]} -eq 0 ]; then
     echo "  npm test"
     echo ""
     echo "To run Konveyor analysis:"
-    echo "  kantra analyze --input . --rules ./rulesets/preview/nodejs/patternfly --output ./analysis-results --source patternfly-v5 --target patternfly-v6 --enable-default-rulesets=false"
+    echo "  kantra analyze --input . --rules ../rulesets/preview/nodejs/patternfly --output ./analysis-results --source patternfly-v5 --target patternfly-v6 --enable-default-rulesets=false"
     echo ""
     echo "Before the workshop, please also:"
     echo "  1. Get an API key from your AI provider (OpenAI, Anthropic, or setup Ollama)"

@@ -56,20 +56,22 @@ npm test
 ### Step 1: Run Konveyor Analysis
 
 ```bash
-# Download the PatternFly v5→v6 ruleset (skip if you used setup script)
+# Download the PatternFly v5→v6 ruleset to parent directory (skip if you used setup script)
+cd ..
 git clone https://github.com/konveyor/rulesets.git
+cd patternfly-migration-workshop
 
 # Run analysis using the preview/nodejs/patternfly ruleset
 kantra analyze \
   --input . \
-  --rules ./rulesets/preview/nodejs/patternfly \
+  --rules ../rulesets/preview/nodejs/patternfly \
   --output ./analysis-results \
   --source patternfly-v5 \
   --target patternfly-v6 \
   --enable-default-rulesets=false
 ```
 
-**Note:** If you used the automated setup script, the rulesets are already cloned for you.
+**Note:** If you used the automated setup script, the rulesets are already cloned to the parent directory (`../rulesets/`).
 
 **Expected Results**: ~30-35 violations across 3 tiers
 
