@@ -30,11 +30,13 @@
      --enable-default-rulesets=false
    ```
 
-3. **Prepare branches**
+3. **Prepare reference branches** (for participants who get stuck)
    - `main` - Original v5 code with violations
-   - `fixed-ai-accepted` - All AI fixes accepted (for comparison)
-   - `fixed-hybrid` - Realistic mix of AI + manual fixes
-   - `fixed-manually` - Traditional manual migration (reference)
+   - `reference/tier1-complete` - Tier 1 fixes applied (simple changes)
+   - `reference/tier2-complete` - Tier 2 fixes applied (structural changes)
+   - `reference/tier3-complete` - Tier 3 fixes applied (edge cases)
+
+   See "Git Branching Strategy" in Facilitator Tips for detailed setup instructions.
 
 ### For Participants
 
@@ -154,6 +156,11 @@ Continue conversations from morning, network, discuss specific use cases
 - Verify VS Code extension configured
 - Run initial analysis
 
+**Git Workflow: Create a branch for Tier 1 fixes**
+```bash
+git checkout -b tier1-fixes
+```
+
 **Exercise 1: Quick Wins (30 min)**
 
 Work through Tier 1 violations:
@@ -176,7 +183,26 @@ Work through Tier 1 violations:
    - Generate and accept
    - Run tests
 
-**Checkpoint:** Everyone should have ~15-20 fixes accepted successfully
+**Checkpoint: Test and Commit Tier 1 Fixes**
+
+Everyone should have ~15-20 fixes accepted successfully. Now verify and commit:
+
+```bash
+# Run tests to verify nothing broke
+npm test
+
+# Run the app and verify in browser
+npm run dev
+
+# Commit your Tier 1 fixes
+git add .
+git commit -s -m "Apply Tier 1 migration fixes (simple renames and props)"
+```
+
+**Git Workflow: Create a branch for Tier 2 fixes**
+```bash
+git checkout -b tier2-fixes
+```
 
 **Exercise 2: Moderate Complexity (45 min)**
 
@@ -196,7 +222,26 @@ Work through Tier 1 violations:
    - Multiple instances
    - Batch process with review
 
-**Checkpoint:** Should have ~25-30 total fixes accepted
+**Checkpoint: Test and Commit Tier 2 Fixes**
+
+Should have ~25-30 total fixes accepted. Now verify and commit:
+
+```bash
+# Run tests to verify nothing broke
+npm test
+
+# Run the app and verify in browser
+npm run dev
+
+# Commit your Tier 2 fixes
+git add .
+git commit -s -m "Apply Tier 2 migration fixes (structural changes)"
+```
+
+**Git Workflow: Create a branch for Tier 3 fixes**
+```bash
+git checkout -b tier3-fixes
+```
 
 **Exercise 3: Edge Cases (30 min)**
 
@@ -215,7 +260,23 @@ Work through Tier 1 violations:
    - Flag for manual review
    - Discussion: AI limitations
 
-**Checkpoint:** Everyone understands when AI needs help
+**Checkpoint: Test and Commit Tier 3 Fixes**
+
+Everyone understands when AI needs help. Now verify and commit:
+
+```bash
+# Run tests to verify nothing broke
+npm test
+
+# Run the app and verify in browser
+npm run dev
+
+# Commit your Tier 3 fixes (note: some may be rejected or manually adjusted)
+git add .
+git commit -s -m "Apply Tier 3 migration fixes (edge cases with manual review)"
+```
+
+**Migration Complete!** You now have a complete migration trail with three checkpoints.
 
 ### Break (15 minutes)
 
@@ -276,6 +337,47 @@ Work through Tier 1 violations:
 - **Have pre-analyzed results** ready if network fails
 - **Prepare to skip exercises** if running behind
 - Focus on Tier 1 + discussion if time is tight
+
+### Git Branching Strategy
+
+The workshop uses a **branch-per-tier approach** for several important reasons:
+
+**Benefits:**
+- **Safe experimentation** - Each tier has its own branch, so mistakes don't break previous work
+- **Clean rollback points** - If Tier 2 goes wrong, participants can return to tier1-fixes
+- **Testing checkpoints** - Tests run after each tier ensure nothing broke
+- **Real-world practice** - Mirrors how migrations should be done incrementally in production
+- **Catchup mechanism** - Participants who fall behind can checkout facilitator's branches
+
+**Branch Structure:**
+```
+main (original v5 code with violations)
+  ├─ tier1-fixes (simple renames, props, CSS)
+     ├─ tier2-fixes (structural changes)
+        ├─ tier3-fixes (edge cases with manual review)
+```
+
+**Facilitator Preparation:**
+Create reference branches ahead of time so participants who get stuck can compare:
+```bash
+# Create reference branches with completed fixes
+git checkout -b reference/tier1-complete
+# ... apply tier 1 fixes ...
+git commit -s -m "Reference: Tier 1 complete"
+
+git checkout -b reference/tier2-complete
+# ... apply tier 2 fixes ...
+git commit -s -m "Reference: Tier 2 complete"
+
+git checkout -b reference/tier3-complete
+# ... apply tier 3 fixes ...
+git commit -s -m "Reference: Tier 3 complete"
+```
+
+**If participants get stuck:**
+- They can compare: `git diff tier1-fixes reference/tier1-complete`
+- They can see what changed: `git log reference/tier1-complete`
+- They can cherry-pick specific fixes if needed
 
 ### Technical Troubleshooting
 
