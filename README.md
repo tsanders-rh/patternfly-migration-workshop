@@ -73,7 +73,9 @@ kantra analyze \
 
 **Note:** If you used the automated setup script, the rulesets are already cloned to the parent directory (`../rulesets/`).
 
-**Expected Results**: ~30-35 violations across 3 tiers
+**Expected Results**: ~211 violations including:
+- ~123 CSS migrations (classes and variables)
+- ~88 code violations across 3 complexity tiers
 
 ### Step 2: Open in VS Code with Konveyor Extension
 

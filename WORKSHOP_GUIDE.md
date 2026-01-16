@@ -102,9 +102,9 @@ kantra analyze \
 ```
 
 Show results:
-- ~30-35 violations found in seconds
-- 95% accuracy (semantic vs. text matching)
-- Organized by component/pattern
+- ~211 violations found in seconds (123 CSS, 88 code)
+- High accuracy (semantic vs. text matching)
+- Organized by component/pattern and file
 
 **Part 3: AI-Assisted Fixes (30 min)**
 
