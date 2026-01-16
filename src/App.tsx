@@ -1,160 +1,179 @@
 import React, { useState } from 'react';
 import {
   Page,
-  PageSection,
+  PageSidebar,
+  PageSidebarBody,
   Masthead,
-  MastheadBrand,
+  MastheadToggle,
   MastheadMain,
-  Button
+  MastheadBrand,
+  MastheadContent,
+  Toolbar,
+  ToolbarContent,
+  ToolbarGroup,
+  ToolbarItem,
+  Nav,
+  NavList,
+  NavItem,
+  NavExpandable,
+  Title,
+  Flex,
+  FlexItem,
+  Button,
+  ButtonVariant
 } from '@patternfly/react-core';
+import { BarsIcon } from '@patternfly/react-icons';
 import {
-  UserProfile,
-  StatusBadge,
-  PageHeader,
-  ActionMenu,
-  EmptyStateExample,
-  IconButtons,
-  CompatibilityLayer,
-  CustomText,
-  ConsumerComponent
-} from './components';
+  ProjectsPage,
+  WorkloadsPage,
+  StoragePage
+} from './pages';
 import './styles/components.css';
 import './styles/tokens.css';
 
-export const App: React.FC = () => {
-  const [interactionsCount, setInteractionsCount] = useState(0);
-  const [showTier3, setShowTier3] = useState(true);
+type PageType = 'projects' | 'workloads' | 'storage';
 
-  const handleInteraction = () => {
-    setInteractionsCount(prev => prev + 1);
+export const App: React.FC = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [activePage, setActivePage] = useState<PageType>('projects');
+  const [activeWorkloadsItem, setActiveWorkloadsItem] = useState('pods');
+
+  const handlePageSelect = (page: PageType) => {
+    setActivePage(page);
+  };
+
+  const headerToolbar = (
+    <Toolbar isFullHeight isStatic>
+      <ToolbarContent>
+        <ToolbarGroup
+          variant="icon-button-group"
+          align={{ default: 'alignRight' }}
+          spacer={{ default: 'spacerNone', md: 'spacerMd' }}
+        >
+          <ToolbarItem>
+            <div style={{ color: '#fff', padding: '0 16px' }}>
+              Workshop Demo
+            </div>
+          </ToolbarItem>
+        </ToolbarGroup>
+      </ToolbarContent>
+    </Toolbar>
+  );
+
+  const header = (
+    <Masthead>
+      <MastheadToggle>
+        <Button
+          variant={ButtonVariant.plain}
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          icon={<BarsIcon />}
+          aria-label="Toggle navigation"
+          style={{ color: '#fff' }}
+        />
+      </MastheadToggle>
+      <MastheadMain>
+        <MastheadBrand>
+          <Flex alignItems={{ default: 'alignItemsCenter' }}>
+            <FlexItem>
+              <div style={{
+                width: '32px',
+                height: '32px',
+                backgroundColor: '#ee0000',
+                borderRadius: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 'bold',
+                color: '#fff',
+                marginRight: '12px'
+              }}>
+                OS
+              </div>
+            </FlexItem>
+            <FlexItem>
+              <Title headingLevel="h1" size="lg" style={{ color: '#fff' }}>
+                OpenShift Console
+              </Title>
+            </FlexItem>
+          </Flex>
+        </MastheadBrand>
+      </MastheadMain>
+      <MastheadContent>{headerToolbar}</MastheadContent>
+    </Masthead>
+  );
+
+  const navigation = (
+    <Nav aria-label="Console navigation">
+      <NavList>
+        <NavItem
+          itemId="home"
+          isActive={activePage === 'projects'}
+          onClick={() => handlePageSelect('projects')}
+        >
+          Projects
+        </NavItem>
+        <NavExpandable
+          title="Workloads"
+          groupId="workloads"
+          isActive={activePage === 'workloads'}
+          isExpanded={activePage === 'workloads'}
+        >
+          <NavItem
+            itemId="pods"
+            groupId="workloads"
+            isActive={activePage === 'workloads' && activeWorkloadsItem === 'pods'}
+            onClick={() => {
+              handlePageSelect('workloads');
+              setActiveWorkloadsItem('pods');
+            }}
+          >
+            Pods
+          </NavItem>
+          <NavItem
+            itemId="deployments"
+            groupId="workloads"
+            isActive={activePage === 'workloads' && activeWorkloadsItem === 'deployments'}
+            onClick={() => {
+              handlePageSelect('workloads');
+              setActiveWorkloadsItem('deployments');
+            }}
+          >
+            Deployments
+          </NavItem>
+        </NavExpandable>
+        <NavItem
+          itemId="storage"
+          isActive={activePage === 'storage'}
+          onClick={() => handlePageSelect('storage')}
+        >
+          Storage
+        </NavItem>
+      </NavList>
+    </Nav>
+  );
+
+  const sidebar = isSidebarOpen ? (
+    <PageSidebar>
+      <PageSidebarBody>{navigation}</PageSidebarBody>
+    </PageSidebar>
+  ) : null;
+
+  const renderPage = () => {
+    switch (activePage) {
+      case 'projects':
+        return <ProjectsPage />;
+      case 'workloads':
+        return <WorkloadsPage activeItem={activeWorkloadsItem} />;
+      case 'storage':
+        return <StoragePage />;
+      default:
+        return <ProjectsPage />;
+    }
   };
 
   return (
-    <Page
-      header={
-        <Masthead>
-          <MastheadMain>
-            <MastheadBrand>
-              PatternFly Migration Workshop
-            </MastheadBrand>
-          </MastheadMain>
-        </Masthead>
-      }
-    >
-      <PageSection>
-        <PageHeader
-          title="Component Examples"
-          subtitle="PatternFly v5 → v6 Migration Patterns"
-        />
-
-        <div style={{
-          marginTop: '16px',
-          padding: '12px',
-          backgroundColor: '#f0f0f0',
-          borderRadius: '4px'
-        }}>
-          <strong>Migration Validation:</strong> Total interactions: {interactionsCount}
-          <p style={{ fontSize: '12px', margin: '4px 0 0 0', color: '#666' }}>
-            Each interaction proves the migrated components still work correctly
-          </p>
-        </div>
-      </PageSection>
-
-      <PageSection className="pf-v5-u-mt-lg">
-        <h2 className="pf-v5-c-title pf-m-xl">Tier 1: Simple Changes</h2>
-
-        <div className="app-section">
-          <h3>User Profile Component</h3>
-          <UserProfile
-            name="Jane Doe"
-            role="Senior Software Engineer"
-            email="jane.doe@example.com"
-          />
-        </div>
-
-        <div className="app-section">
-          <h3>Status Badge Component (Interactive)</h3>
-          <p style={{ fontSize: '14px', marginBottom: '8px' }}>
-            Click badges to test event handlers after migration:
-          </p>
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-            <StatusBadge status="active" isDisabled={false} />
-            <StatusBadge status="pending" />
-            <StatusBadge status="inactive" isDisabled={true} />
-          </div>
-        </div>
-      </PageSection>
-
-      <PageSection className="pf-v5-u-mt-lg">
-        <h2 className="pf-v5-c-title pf-m-xl">Tier 2: Moderate Complexity</h2>
-
-        <div className="app-section">
-          <h3>Action Menu Component (Interactive)</h3>
-          <p style={{ fontSize: '14px', marginBottom: '8px' }}>
-            Open menu and select actions to test MenuToggle migration:
-          </p>
-          <ActionMenu
-            onEdit={handleInteraction}
-            onDelete={handleInteraction}
-          />
-        </div>
-
-        <div className="app-section">
-          <h3>Icon Buttons Component (Interactive)</h3>
-          <p style={{ fontSize: '14px', marginBottom: '8px' }}>
-            Click buttons to test icon prop migration:
-          </p>
-          <IconButtons
-            onAdd={handleInteraction}
-            onEdit={handleInteraction}
-            onDelete={handleInteraction}
-          />
-        </div>
-
-        <div className="app-section">
-          <h3>Empty State Component (Interactive)</h3>
-          <p style={{ fontSize: '14px', marginBottom: '8px' }}>
-            Click "Clear filters" to test EmptyState structure changes:
-          </p>
-          <EmptyStateExample
-            onAction={handleInteraction}
-          />
-        </div>
-      </PageSection>
-
-      <PageSection className="pf-v5-u-mt-lg pf-v5-u-mb-lg">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h2 className="pf-v5-c-title pf-m-xl">Tier 3: Edge Cases</h2>
-          <Button
-            variant="secondary"
-            onClick={() => setShowTier3(!showTier3)}
-          >
-            {showTier3 ? 'Hide' : 'Show'} Edge Cases
-          </Button>
-        </div>
-
-        {showTier3 && (
-          <>
-            <div className="app-section">
-              <h3>Compatibility Layer (Intentional Dual Support)</h3>
-              <p style={{ fontSize: '14px', marginBottom: '8px', color: '#856404', backgroundColor: '#fff3cd', padding: '8px', borderRadius: '4px' }}>
-                ⚠️ This component should NOT be auto-migrated - it intentionally uses v5 patterns
-              </p>
-              <CompatibilityLayer useV6={false}>
-                This uses a compatibility layer for gradual migration
-              </CompatibilityLayer>
-            </div>
-
-            <div className="app-section">
-              <h3>Custom Wrapper Component</h3>
-              <p style={{ fontSize: '14px', marginBottom: '8px', color: '#004085', backgroundColor: '#cce5ff', padding: '8px', borderRadius: '4px' }}>
-                ℹ️ Internal implementation migrates, but public API stays stable
-              </p>
-              <ConsumerComponent />
-            </div>
-          </>
-        )}
-      </PageSection>
+    <Page header={header} sidebar={sidebar}>
+      {renderPage()}
     </Page>
   );
 };
