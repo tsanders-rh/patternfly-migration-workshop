@@ -414,7 +414,7 @@ if [ ${#ERRORS[@]} -eq 0 ]; then
     echo "  npm test"
     echo ""
     echo "To run Konveyor analysis:"
-    echo "  kantra analyze --input . --rules ./rulesets/preview/nodejs/patternfly --output ./analysis-results --source patternfly-v5 --target patternfly-v6"
+    echo "  kantra analyze --input . --rules ./rulesets/preview/nodejs/patternfly --output ./analysis-results --source patternfly-v5 --target patternfly-v6 --enable-default-rulesets=false"
     echo ""
     echo "Before the workshop, please also:"
     echo "  1. Get an API key from your AI provider (OpenAI, Anthropic, or setup Ollama)"

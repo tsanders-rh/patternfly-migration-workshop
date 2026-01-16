@@ -23,8 +23,11 @@
    ```bash
    kantra analyze \
      --input . \
-     --rules <path-to-patternfly-rules> \
-     --output ./analysis-results-backup
+     --rules ./rulesets/preview/nodejs/patternfly \
+     --output ./analysis-results-backup \
+     --source patternfly-v5 \
+     --target patternfly-v6 \
+     --enable-default-rulesets=false
    ```
 
 3. **Prepare branches**
@@ -92,7 +95,10 @@ Show generated rules:
 kantra analyze \
   --input . \
   --rules ./rulesets/preview/nodejs/patternfly \
-  --output ./analysis-results
+  --output ./analysis-results \
+  --source patternfly-v5 \
+  --target patternfly-v6 \
+  --enable-default-rulesets=false
 ```
 
 Show results:
@@ -407,8 +413,11 @@ npm test
 # Run analysis
 kantra analyze \
   --input . \
-  --rules <path-to-patternfly-rules> \
-  --output ./analysis-results
+  --rules ./rulesets/preview/nodejs/patternfly \
+  --output ./analysis-results \
+  --source patternfly-v5 \
+  --target patternfly-v6 \
+  --enable-default-rulesets=false
 
 # Compare branches
 git diff main..fixed-ai-accepted
@@ -426,7 +435,13 @@ npm run dev
 npm test
 
 # 3. Run analysis - see ~35 violations
-kantra analyze --input . --rules <patternfly-rules> --output ./before-migration
+kantra analyze \
+  --input . \
+  --rules ./rulesets/preview/nodejs/patternfly \
+  --output ./before-migration \
+  --source patternfly-v5 \
+  --target patternfly-v6 \
+  --enable-default-rulesets=false
 ```
 
 ### After AI-Generated Fixes
@@ -444,7 +459,13 @@ npm run lint
 # ✅ No new warnings
 
 # 4. Re-analyze - violations gone
-kantra analyze --input . --rules <patternfly-rules> --output ./after-migration
+kantra analyze \
+  --input . \
+  --rules ./rulesets/preview/nodejs/patternfly \
+  --output ./after-migration \
+  --source patternfly-v5 \
+  --target patternfly-v6 \
+  --enable-default-rulesets=false
 # ✅ Should show 0-5 violations (edge cases only)
 ```
 

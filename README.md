@@ -65,7 +65,8 @@ kantra analyze \
   --rules ./rulesets/preview/nodejs/patternfly \
   --output ./analysis-results \
   --source patternfly-v5 \
-  --target patternfly-v6
+  --target patternfly-v6 \
+  --enable-default-rulesets=false
 ```
 
 **Note:** If you used the automated setup script, the rulesets are already cloned for you.

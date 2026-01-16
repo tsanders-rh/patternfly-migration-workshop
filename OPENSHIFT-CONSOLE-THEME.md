@@ -130,7 +130,8 @@ kantra analyze \
   --rules ./rulesets/preview/nodejs/patternfly \
   --output ./analysis-results \
   --source patternfly-v5 \
-  --target patternfly-v6
+  --target patternfly-v6 \
+  --enable-default-rulesets=false
 ```
 
 Expected: Same ~30-35 violations as main branch, just organized differently in console pages.

@@ -397,7 +397,7 @@ if ($script:Errors.Count -eq 0) {
     Write-Host "  npm test"
     Write-Host ""
     Write-Host "To run Konveyor analysis:"
-    Write-Host "  kantra analyze --input . --rules .\rulesets\preview\nodejs\patternfly --output .\analysis-results --source patternfly-v5 --target patternfly-v6"
+    Write-Host "  kantra analyze --input . --rules .\rulesets\preview\nodejs\patternfly --output .\analysis-results --source patternfly-v5 --target patternfly-v6 --enable-default-rulesets=false"
     Write-Host ""
     Write-Host "Before the workshop, please also:"
     Write-Host "  1. Get an API key from your AI provider (OpenAI, Anthropic, or setup Ollama)"

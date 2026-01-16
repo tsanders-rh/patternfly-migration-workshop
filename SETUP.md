@@ -179,7 +179,7 @@ You'll need an API key from one of these providers for the workshop:
 Kantra supports hybrid mode, which combines static analysis with AI-assisted fixes. After setup, you can run:
 
 ```bash
-# Run analysis with hybrid mode (requires AI provider)
+# Run analysis with PatternFly rules only
 kantra analyze \
   --input . \
   --rules ./rulesets/preview/nodejs/patternfly \
