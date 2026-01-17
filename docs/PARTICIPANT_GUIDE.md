@@ -18,11 +18,11 @@ Welcome! This guide will walk you through today's hands-on exercises.
 
 **How to Identify Tiers:**
 
-Violations in VS Code will be prefixed with tier indicators:
-- **`[Tier 1]`** - Simple changes, safe to auto-apply with quick review
-- **`[Tier 1 - Bulk CSS]`** - CSS pattern updates, safe to batch-apply
-- **`[Tier 2 ⚠️ Review]`** - Structural changes, review carefully before applying
-- **No `[Tier 3]` prefix exists** - You'll identify Tier 3 by context (see Exercise 3)
+Violations in VS Code will be prefixed with colored tier indicators:
+- **🟢 `[Tier 1]`** - Simple changes, safe to auto-apply with quick review
+- **🟢 `[Tier 1 - Bulk CSS]`** - CSS pattern updates, safe to batch-apply
+- **🟡 `[Tier 2]`** - Structural changes, review carefully before applying
+- **No tier prefix** - You'll identify Tier 3 by context (see Exercise 3)
 
 ---
 
@@ -734,7 +734,7 @@ When reviewing AI fixes, ask yourself:
 
 **Migrate your own codebase:**
 
-1. Clone the rulesets: [github.com/konveyor/rulesets](https://github.com/konveyor/rulesets)
+1. Clone the rulesets with tier labels: [github.com/tsanders-rh/rulesets/tree/patternfly-workshop-tiers](https://github.com/tsanders-rh/rulesets/tree/patternfly-workshop-tiers)
 2. Run analysis on your code
 3. Apply the techniques you learned today
 4. Share your success story!

@@ -72,12 +72,12 @@ for yaml_file in *.yaml; do
             if (complexity == "low") {
                 # Check if CSS-related for Bulk CSS tag
                 if (desc ~ /pf-v5-[cu]-/ || desc ~ /--pf-v5-global/) {
-                    prefix = "[Tier 1 - Bulk CSS] "
+                    prefix = "🟢 [Tier 1 - Bulk CSS] "
                 } else {
-                    prefix = "[Tier 1] "
+                    prefix = "🟢 [Tier 1] "
                 }
             } else if (complexity == "medium") {
-                prefix = "[Tier 2 ⚠️  Review] "
+                prefix = "🟡 [Tier 2] "
             } else {
                 prefix = ""
             }
@@ -85,10 +85,17 @@ for yaml_file in *.yaml; do
             # Print buffered rule with prefix
             for (i = 0; i < buffer_count; i++) {
                 if (buffer[i] ~ /^  description:/ && prefix != "" && buffer[i] !~ /\[Tier/) {
-                    # Add prefix to description
-                    sub(/^  description: /, "  description: " prefix, buffer[i])
+                    # Add prefix to description and quote it (YAML requires quotes when starting with [)
+                    desc_text = desc  # Use the merged description
+                    sub(/^  description: /, "", desc_text)
+                    # Escape any existing double quotes in the description
+                    gsub(/"/, "\\\"", desc_text)
+                    buffer[i] = "  description: \"" prefix desc_text "\""
                 }
-                print buffer[i]
+                # Skip empty buffer lines (continuation lines that were merged)
+                if (buffer[i] != "") {
+                    print buffer[i]
+                }
             }
         } else if (in_rule) {
             # Print buffered lines without modification
@@ -115,6 +122,15 @@ for yaml_file in *.yaml; do
             desc=$0
         }
 
+        # Handle continuation lines for description (indented lines after description:)
+        if (has_desc && prev_was_desc && /^    [^ ]/) {
+            # This is a continuation line - merge it with description
+            desc = desc " " substr($0, 5)  # Remove leading spaces and append
+            buffer[buffer_count-1] = ""  # Mark continuation line for removal
+        }
+
+        prev_was_desc = /^  description:/
+
         if (/^  migration_complexity: /) {
             complexity=$NF
         }
@@ -130,21 +146,29 @@ for yaml_file in *.yaml; do
         if (in_rule && has_desc && complexity != "") {
             if (complexity == "low") {
                 if (desc ~ /pf-v5-[cu]-/ || desc ~ /--pf-v5-global/) {
-                    prefix = "[Tier 1 - Bulk CSS] "
+                    prefix = "🟢 [Tier 1 - Bulk CSS] "
                 } else {
-                    prefix = "[Tier 1] "
+                    prefix = "🟢 [Tier 1] "
                 }
             } else if (complexity == "medium") {
-                prefix = "[Tier 2 ⚠️  Review] "
+                prefix = "🟡 [Tier 2] "
             } else {
                 prefix = ""
             }
 
             for (i = 0; i < buffer_count; i++) {
                 if (buffer[i] ~ /^  description:/ && prefix != "" && buffer[i] !~ /\[Tier/) {
-                    sub(/^  description: /, "  description: " prefix, buffer[i])
+                    # Add prefix to description and quote it (YAML requires quotes when starting with [)
+                    desc_text = desc  # Use the merged description
+                    sub(/^  description: /, "", desc_text)
+                    # Escape any existing double quotes in the description
+                    gsub(/"/, "\\\"", desc_text)
+                    buffer[i] = "  description: \"" prefix desc_text "\""
                 }
-                print buffer[i]
+                # Skip empty buffer lines (continuation lines that were merged)
+                if (buffer[i] != "") {
+                    print buffer[i]
+                }
             }
         } else if (in_rule) {
             for (i = 0; i < buffer_count; i++) {
@@ -174,15 +198,15 @@ echo ""
 
 if [ "$CHANGED" -gt 0 ]; then
     echo "Sample Tier 1 (low complexity):"
-    git diff | grep "^+.*\[Tier 1\]" | head -3
+    git diff | grep "^+.*🟢 \[Tier 1\]" | head -3
     echo ""
     echo "Sample Tier 2 (medium complexity):"
-    git diff | grep "^+.*\[Tier 2" | head -3
+    git diff | grep "^+.*🟡 \[Tier 2\]" | head -3
     echo ""
     echo "Total by tier:"
-    echo "  Tier 1: $(git diff | grep -c "^+.*\[Tier 1\]" || echo 0)"
-    echo "  Tier 1 Bulk CSS: $(git diff | grep -c "^+.*\[Tier 1 - Bulk CSS\]" || echo 0)"
-    echo "  Tier 2: $(git diff | grep -c "^+.*\[Tier 2" || echo 0)"
+    echo "  🟢 Tier 1: $(git diff | grep -c "^+.*🟢 \[Tier 1\]" || echo 0)"
+    echo "  🟢 Tier 1 Bulk CSS: $(git diff | grep -c "^+.*🟢 \[Tier 1 - Bulk CSS\]" || echo 0)"
+    echo "  🟡 Tier 2: $(git diff | grep -c "^+.*🟡 \[Tier 2\]" || echo 0)"
 fi
 
 print_header "Next Steps"

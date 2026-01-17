@@ -303,18 +303,20 @@ fi
 print_header "Konveyor Rulesets Setup"
 
 RULESETS_DIR="../rulesets"
-RULESETS_URL="https://github.com/konveyor/rulesets.git"
+RULESETS_URL="https://github.com/tsanders-rh/rulesets.git"
+RULESETS_BRANCH="patternfly-workshop-tiers"
 
 if [ -d "$RULESETS_DIR" ]; then
     print_info "Rulesets directory already exists in parent directory"
     cd "$RULESETS_DIR"
 
-    if git remote get-url origin 2>/dev/null | grep -q "konveyor/rulesets"; then
+    if git remote get-url origin 2>/dev/null | grep -q -E "(konveyor/rulesets|tsanders-rh/rulesets)"; then
         print_success "Existing rulesets repository found"
 
-        echo "Updating rulesets..."
-        if git pull; then
-            print_success "Rulesets updated"
+        echo "Updating rulesets and checking out $RULESETS_BRANCH branch..."
+        git fetch origin
+        if git checkout "$RULESETS_BRANCH" && git pull origin "$RULESETS_BRANCH"; then
+            print_success "Rulesets updated to $RULESETS_BRANCH branch with tier labels"
         else
             print_warning "Could not update rulesets (may have local changes)"
         fi
@@ -325,14 +327,15 @@ if [ -d "$RULESETS_DIR" ]; then
         echo "  Skipping rulesets clone. You may need to clone manually."
     fi
 else
-    echo "Cloning Konveyor rulesets repository to parent directory..."
-    if git clone "$RULESETS_URL" "$RULESETS_DIR"; then
-        print_success "Rulesets cloned successfully"
+    echo "Cloning PatternFly workshop rulesets repository (with tier labels) to parent directory..."
+    if git clone -b "$RULESETS_BRANCH" "$RULESETS_URL" "$RULESETS_DIR"; then
+        print_success "Rulesets cloned successfully on $RULESETS_BRANCH branch"
         print_info "PatternFly ruleset location: ../rulesets/preview/nodejs/patternfly"
+        print_info "Rules include tier labels: 🟢 [Tier 1] for simple changes, 🟡 [Tier 2] for review"
     else
         print_warning "Failed to clone rulesets repository"
         echo "  You can clone manually later with:"
-        echo "  cd .. && git clone $RULESETS_URL"
+        echo "  cd .. && git clone -b $RULESETS_BRANCH $RULESETS_URL"
     fi
 fi
 

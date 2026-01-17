@@ -56,9 +56,9 @@ npm test
 ### Step 1: Run Konveyor Analysis
 
 ```bash
-# Download the PatternFly v5→v6 ruleset to parent directory (skip if you used setup script)
+# Download the PatternFly v5→v6 ruleset with tier labels to parent directory (skip if you used setup script)
 cd ..
-git clone https://github.com/konveyor/rulesets.git
+git clone -b patternfly-workshop-tiers https://github.com/tsanders-rh/rulesets.git
 cd patternfly-migration-workshop
 
 # Run analysis using the preview/nodejs/patternfly ruleset
@@ -154,7 +154,8 @@ After completing this workshop, you'll understand:
   - Part 3: AI-Assisted Fixes with Konveyor
 - [Konveyor Project](https://konveyor.io)
 - [PatternFly v6 Migration Guide](https://www.patternfly.org/get-started/upgrade/)
-- [Konveyor Rulesets Repository](https://github.com/konveyor/rulesets)
+- [Konveyor Rulesets Repository](https://github.com/konveyor/rulesets) (upstream)
+- [Workshop Rulesets with Tier Labels](https://github.com/tsanders-rh/rulesets/tree/patternfly-workshop-tiers) (used in this workshop)
 
 ## Documentation
 

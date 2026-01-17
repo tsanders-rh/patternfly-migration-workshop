@@ -280,20 +280,23 @@ if (Test-Path $workshopDir) {
 Print-Header "Konveyor Rulesets Setup"
 
 $rulesetsDir = "..\rulesets"
-$rulesetsUrl = "https://github.com/konveyor/rulesets.git"
+$rulesetsUrl = "https://github.com/tsanders-rh/rulesets.git"
+$rulesetsBranch = "patternfly-workshop-tiers"
 
 if (Test-Path $rulesetsDir) {
     Print-Info "Rulesets directory already exists in parent directory"
     Set-Location $rulesetsDir
 
     $remoteUrl = git remote get-url origin 2>$null
-    if ($remoteUrl -match "konveyor/rulesets") {
+    if ($remoteUrl -match "(konveyor/rulesets|tsanders-rh/rulesets)") {
         Print-Success "Existing rulesets repository found"
 
-        Write-Host "Updating rulesets..."
+        Write-Host "Updating rulesets and checking out $rulesetsBranch branch..."
         try {
-            git pull
-            Print-Success "Rulesets updated"
+            git fetch origin
+            git checkout $rulesetsBranch
+            git pull origin $rulesetsBranch
+            Print-Success "Rulesets updated to $rulesetsBranch branch with tier labels"
         } catch {
             Print-Warning "Could not update rulesets (may have local changes)"
         }
@@ -304,15 +307,16 @@ if (Test-Path $rulesetsDir) {
         Write-Host "  Skipping rulesets clone. You may need to clone manually."
     }
 } else {
-    Write-Host "Cloning Konveyor rulesets repository to parent directory..."
+    Write-Host "Cloning PatternFly workshop rulesets repository (with tier labels) to parent directory..."
     try {
-        git clone $rulesetsUrl $rulesetsDir
-        Print-Success "Rulesets cloned successfully"
+        git clone -b $rulesetsBranch $rulesetsUrl $rulesetsDir
+        Print-Success "Rulesets cloned successfully on $rulesetsBranch branch"
         Print-Info "PatternFly ruleset location: ..\rulesets\preview\nodejs\patternfly"
+        Print-Info "Rules include tier labels: 🟢 [Tier 1] for simple changes, 🟡 [Tier 2] for review"
     } catch {
         Print-Warning "Failed to clone rulesets repository"
         Write-Host "  You can clone manually later with:"
-        Write-Host "  cd .. && git clone $rulesetsUrl"
+        Write-Host "  cd .. && git clone -b $rulesetsBranch $rulesetsUrl"
     }
 }
 
