@@ -20,15 +20,38 @@ Automated setup for shared AWS Bedrock credentials:
 
 **Cost**: ~$10-20 for 30 participants
 
+### Ruleset Tier Prefixes
+
+Add tier indicators to PatternFly rules for better workshop UX:
+
+- **[TIER_MAPPING.md](./TIER_MAPPING.md)** - Tier categorization guide
+- **[add-tier-prefixes.sh](./add-tier-prefixes.sh)** - Adds [Tier 1/2/3] prefixes to rules
+
+**When to use**: Enhances workshop by showing difficulty level in VS Code violation messages.
+
+**Requires**: Fork of konveyor/rulesets repository
+
 ---
 
 ## Quick Start (Facilitators)
 
 ### 1 Week Before Workshop
 
+**Optional: Add tier prefixes to rules (recommended)**
+
 ```bash
 cd infrastructure
 
+# Add tier prefixes to your rulesets fork
+./add-tier-prefixes.sh ~/Workspace/Rulesets
+
+# This creates a branch: patternfly-workshop-tiers
+# Review, commit, and push to your fork
+```
+
+**Setup AWS Bedrock (if providing shared credentials)**
+
+```bash
 # Update workshop date in setup-bedrock.sh
 # Then run setup
 ./setup-bedrock.sh
