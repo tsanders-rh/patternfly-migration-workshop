@@ -124,14 +124,16 @@ src/
 
 | Category | Count | Examples |
 |----------|-------|----------|
-| Component Renames | 6-8 | Text→Content, Chip→Label |
-| Prop Changes | 4-6 | isDisabled→disabled, isOpen→open |
-| CSS Classes | 8-10 | pf-v5-c-* → pf-v6-c-* |
-| CSS Variables | 12-15 | --pf-v5-global → --pf-t--global |
-| Icon Restructuring | 3-4 | MenuToggle, Button icon props |
-| Structural Changes | 2-3 | EmptyState consolidation |
-| React.FC Removals | 8-10 | Modern function components |
-| **Total** | **~30-35** | |
+| **CSS Classes** | ~53 | pf-v5-c-* → pf-v6-c-*, pf-v5-u-* → pf-v6-u-* |
+| **CSS Variables** | ~70 | --pf-v5-global → --pf-t--global |
+| **Component Renames** | 6 | Text→Content, Chip→Label |
+| **Prop Changes** | ~40 | isDisabled→disabled, isActive→isCurrent |
+| **Structural Changes** | ~15 | MenuToggle icons, EmptyState, Button icons |
+| **Edge Cases** | ~5 | CompatibilityLayer, DynamicComponent |
+| | | |
+| **Total CSS** | **~123** | Bulk migration patterns |
+| **Total Code** | **~88** | Component & prop updates |
+| **Grand Total** | **~211** | All violations combined |
 
 ## Learning Objectives
 
