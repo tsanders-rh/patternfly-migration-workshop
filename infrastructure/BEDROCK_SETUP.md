@@ -46,10 +46,10 @@ Before running the setup script:
      - Create budgets
      - Access Bedrock
 
-4. **Enable Claude 3.5 Sonnet in Bedrock**
+4. **Enable Claude Sonnet 4.5 in Bedrock**
    - Visit: https://console.aws.amazon.com/bedrock/home?region=us-east-1#/modelaccess
    - Click "Enable specific models"
-   - Enable: **Claude 3.5 Sonnet v2**
+   - Enable: **Claude Sonnet 4.5**
    - Wait 2-3 minutes for activation
 
 ---
@@ -113,7 +113,7 @@ This verifies:
 ```
 ✓ Credentials are valid
 ✓ Can access Bedrock service
-✓ Model anthropic.claude-3-5-sonnet-20241022-v2:0 is available
+✓ Model anthropic.claude-sonnet-4-5-20250929-v1:0 is available
 ✓ Model invocation successful!
 ✓ Credentials valid for 48 more hours
 ```
@@ -134,7 +134,7 @@ Add to .vscode/settings.json:
 {
   "konveyor.ai.provider": "bedrock",
   "konveyor.ai.bedrock.region": "us-east-1",
-  "konveyor.ai.bedrock.model": "anthropic.claude-3-5-sonnet-20241022-v2:0",
+  "konveyor.ai.bedrock.model": "anthropic.claude-sonnet-4-5-20250929-v1:0",
   "konveyor.ai.bedrock.accessKeyId": "AKIA...",
   "konveyor.ai.bedrock.secretAccessKey": "..."
 }
@@ -278,12 +278,12 @@ If you see during workshop:
 
 ### "Model not found" error
 
-**Problem**: Claude 3.5 Sonnet not enabled in Bedrock
+**Problem**: Claude Sonnet 4.5 not enabled in Bedrock
 
 **Solution**:
 1. Visit: https://console.aws.amazon.com/bedrock/home?region=us-east-1#/modelaccess
 2. Click "Modify model access"
-3. Enable "Claude 3.5 Sonnet"
+3. Enable "Claude Sonnet 4.5"
 4. Wait 2-3 minutes
 5. Run `./test-bedrock.sh` again
 
@@ -329,7 +329,7 @@ aws logs tail /aws/bedrock/modelinvocations --follow
 
 ## Cost Breakdown
 
-### Claude 3.5 Sonnet Pricing (Bedrock)
+### Claude Sonnet 4.5 Pricing (Bedrock)
 
 - **Input**: $3.00 per 1M tokens
 - **Output**: $15.00 per 1M tokens
@@ -405,7 +405,7 @@ These files are in `.gitignore` to prevent accidental commits.
 aws cloudwatch get-metric-statistics \
   --namespace AWS/Bedrock \
   --metric-name Invocations \
-  --dimensions Name=ModelId,Value=anthropic.claude-3-5-sonnet-20241022-v2:0 \
+  --dimensions Name=ModelId,Value=anthropic.claude-sonnet-4-5-20250929-v1:0 \
   --start-time $(date -u -d '1 hour ago' +%Y-%m-%dT%H:%M:%S) \
   --end-time $(date -u +%Y-%m-%dT%H:%M:%S) \
   --period 300 \

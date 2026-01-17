@@ -26,7 +26,7 @@ EXPIRY_DATE="${WORKSHOP_DATE}T23:59:59Z"
 IAM_USER_NAME="patternfly-workshop-bedrock"
 IAM_POLICY_NAME="PatternFlyWorkshopBedrockAccess"
 BEDROCK_REGION="us-east-1"
-BEDROCK_MODEL="anthropic.claude-3-5-sonnet-20241022-v2:0"
+BEDROCK_MODEL="anthropic.claude-sonnet-4-5-20250929-v1:0"
 BUDGET_LIMIT=50  # Dollars
 OUTPUT_FILE="bedrock-credentials.txt"
 

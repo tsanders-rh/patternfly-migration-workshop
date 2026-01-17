@@ -11,7 +11,7 @@ For workshop participants, we provide shared AWS Bedrock access:
 {
   "konveyor.ai.provider": "bedrock",
   "konveyor.ai.bedrock.region": "us-east-1",
-  "konveyor.ai.bedrock.model": "anthropic.claude-3-5-sonnet-20241022-v2:0",
+  "konveyor.ai.bedrock.model": "anthropic.claude-sonnet-4-5-20250929-v1:0",
   "konveyor.ai.bedrock.accessKeyId": "SHARED_AT_WORKSHOP",
   "konveyor.ai.bedrock.secretAccessKey": "SHARED_AT_WORKSHOP"
 }
@@ -58,13 +58,13 @@ For workshop participants, we provide shared AWS Bedrock access:
 {
   "konveyor.ai.provider": "anthropic",
   "konveyor.ai.anthropic.apiKey": "sk-ant-...",
-  "konveyor.ai.anthropic.model": "claude-3-5-sonnet-20241022"
+  "konveyor.ai.anthropic.model": "claude-sonnet-4-5-20250929"
 }
 ```
 
 **Recommended Models:**
-- `claude-3-5-sonnet-20241022` - Best for code (recommended)
-- `claude-3-haiku-20240307` - Faster, cheaper, good quality
+- `claude-sonnet-4-5-20250929` - Best for code (recommended)
+- `claude-3-5-haiku-20241022` - Faster, cheaper, good quality
 
 ---
 
@@ -147,7 +147,7 @@ ollama serve
 {
   "konveyor.ai.provider": "bedrock",
   "konveyor.ai.bedrock.region": "us-east-1",
-  "konveyor.ai.bedrock.model": "anthropic.claude-3-5-sonnet-20241022-v2:0",
+  "konveyor.ai.bedrock.model": "anthropic.claude-sonnet-4-5-20250929-v1:0",
   "konveyor.ai.bedrock.accessKeyId": "YOUR_ACCESS_KEY",
   "konveyor.ai.bedrock.secretAccessKey": "YOUR_SECRET_KEY"
 }
