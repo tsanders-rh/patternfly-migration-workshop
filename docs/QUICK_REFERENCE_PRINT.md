@@ -60,13 +60,14 @@ npm run build          # Production build
 
 \newpage
 
-# VS Code - Konveyor Extension
+# VS Code - Konveyor AI (Kai)
 
-**Load Analysis Results**
+**Configure & Run Analysis**
 
-1. Open Konveyor view in sidebar
-2. Click "Load Analysis Results"
-3. Select `analysis-results/output.yaml`
+1. Add AI credentials to `.vscode/settings.json`
+2. Open Konveyor view in sidebar
+3. Click "Analyze workspace"
+4. Wait ~30-60 seconds for Kai to analyze
 
 **Generate AI Solution**
 

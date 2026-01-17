@@ -92,14 +92,9 @@ open analysis-results/static-report/index.html
 code .
 ```
 
-**5. Load Konveyor Analysis:**
+**5. Configure Konveyor AI (Kai):**
 
-- Open Konveyor view in VS Code (sidebar icon)
-- Click "Load Analysis Results"
-- Select `analysis-results/output.yaml`
-- You should see the same ~274 violations organized by file
-
-**6. Configure AI Provider:**
+The Konveyor VS Code extension runs its own analysis with AI integration.
 
 Add shared Bedrock credentials to `.vscode/settings.json`:
 
@@ -109,11 +104,19 @@ Add shared Bedrock credentials to `.vscode/settings.json`:
   "konveyor.ai.bedrock.region": "us-east-1",
   "konveyor.ai.bedrock.model": "anthropic.claude-sonnet-4-5-20250929-v1:0",
   "konveyor.ai.bedrock.accessKeyId": "GET_FROM_FACILITATOR",
-  "konveyor.ai.bedrock.secretAccessKey": "GET_FROM_FACILITATOR"
+  "konveyor.ai.bedrock.secretAccessKey": "GET_FROM_FACILITATOR",
+  "konveyor.analyzerPath": "../rulesets/preview/nodejs/patternfly"
 }
 ```
 
 **Or use your own API key:** See [AI_PROVIDERS.md](./AI_PROVIDERS.md)
+
+**6. Run Kai Analysis:**
+
+- Open Konveyor view in VS Code (sidebar icon)
+- Click "Analyze workspace" or select the workspace folder
+- Kai will run analysis using the PatternFly rules (~30-60 seconds)
+- You should see ~274 violations organized by file with AI-powered context
 
 **7. Test AI Integration:**
 
