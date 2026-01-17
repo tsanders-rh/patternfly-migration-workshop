@@ -16,6 +16,14 @@ Welcome! This guide will walk you through today's hands-on exercises.
 - **Tier 2** (45 min): Moderate complexity - structural refactoring
 - **Tier 3** (30 min): Edge cases - when AI needs your help
 
+**How to Identify Tiers:**
+
+Violations in VS Code will be prefixed with tier indicators:
+- **`[Tier 1]`** - Simple changes, safe to auto-apply with quick review
+- **`[Tier 1 - Bulk CSS]`** - CSS pattern updates, safe to batch-apply
+- **`[Tier 2 ⚠️ Review]`** - Structural changes, review carefully before applying
+- **No `[Tier 3]` prefix exists** - You'll identify Tier 3 by context (see Exercise 3)
+
 ---
 
 ## Day-of Quick Start
@@ -85,12 +93,14 @@ git checkout -b tier1-fixes
 
 ### Step 2: Find Tier 1 Violations
 
-In Konveyor view, look for:
-- **Text → Content** component renames
-- **Chip → Label** component renames
-- **isDisabled → disabled** prop changes
-- **CSS class updates** (pf-v5-* → pf-v6-*)
-- **CSS variable updates** (--pf-v5-global → --pf-t--)
+In Konveyor view, look for violations prefixed with **`[Tier 1]`** or **`[Tier 1 - Bulk CSS]`**:
+
+- **`[Tier 1]`** Imports of Text should reference Content
+- **`[Tier 1]`** Chip component should be replaced with Label
+- **`[Tier 1]`** isDisabled prop should be updated to disabled
+- **`[Tier 1 - Bulk CSS]`** CSS class pf-v5-c-* should be pf-v6-c-*
+- **`[Tier 1 - Bulk CSS]`** CSS class pf-v5-u-* should be pf-v6-u-*
+- **`[Tier 1 - Bulk CSS]`** CSS variable --pf-v5-global-* should be --pf-t--global-*
 
 **Where to find them:**
 - `src/components/tier1-simple/UserProfile.tsx` - Text → Content
@@ -98,13 +108,16 @@ In Konveyor view, look for:
 - `src/styles/*.css` - CSS classes and variables
 - `src/pages/ProjectsPage.tsx` - Multiple Tier 1 violations
 
+**Tip:** Use VS Code's filter/search in Konveyor view to show only `[Tier 1]` violations
+
 ### Step 3: Apply Your First Fix
 
 **Example: Text → Content in UserProfile.tsx**
 
 1. **Find the violation:**
    - Konveyor view → Expand "UserProfile.tsx"
-   - Click on violation: "Text component renamed to Content"
+   - Click on violation: **"[Tier 1] Imports of Text should reference Content"**
+   - Notice the `[Tier 1]` prefix → indicates simple change
 
 2. **Generate AI fix:**
    - Click "Get solution"
@@ -139,12 +152,13 @@ In Konveyor view, look for:
 **Repeat for these violations (aim for 15-20 total):**
 
 **Quick wins (high confidence - accept):**
-- ✅ CSS variable updates in `styles/tokens.css`
-- ✅ CSS class updates in `styles/components.css`
-- ✅ Chip → Label in `StatusBadge.tsx`
-- ✅ isDisabled → disabled throughout codebase
+- ✅ **`[Tier 1 - Bulk CSS]`** CSS variable updates in `styles/tokens.css`
+- ✅ **`[Tier 1 - Bulk CSS]`** CSS class updates in `styles/components.css`
+- ✅ **`[Tier 1]`** Chip → Label in `StatusBadge.tsx`
+- ✅ **`[Tier 1]`** isDisabled → disabled throughout codebase
 
 **What to look for in AI reasoning:**
+- ✅ Violation shows `[Tier 1]` prefix → simple change
 - ✅ Clear explanation of the change
 - ✅ Specific line numbers mentioned
 - ✅ "Props remain unchanged" for simple renames
@@ -206,14 +220,19 @@ git checkout -b tier2-fixes
 
 ### Step 2: Find Tier 2 Violations
 
-These require **more careful review**:
+In Konveyor view, look for violations prefixed with **`[Tier 2 ⚠️ Review]`**:
 
-- **MenuToggle icon restructuring** - `src/components/tier2-moderate/ActionMenu.tsx`
-- **EmptyState component changes** - `src/components/tier2-moderate/EmptyStateExample.tsx`
-- **Button icon props** - `src/components/tier2-moderate/IconButtons.tsx`
+- **`[Tier 2 ⚠️ Review]`** MenuToggle icon should use icon prop instead of child
+- **`[Tier 2 ⚠️ Review]`** EmptyState structure consolidated in v6
+- **`[Tier 2 ⚠️ Review]`** Button icon props restructured
 
-**Also check:**
+**Where to find them:**
+- `src/components/tier2-moderate/ActionMenu.tsx` - MenuToggle icon restructuring
+- `src/components/tier2-moderate/EmptyStateExample.tsx` - EmptyState component changes
+- `src/components/tier2-moderate/IconButtons.tsx` - Button icon props
 - `src/pages/WorkloadsPage.tsx` - Contains Tier 2 components
+
+**Notice:** The ⚠️ emoji warns you to review carefully before applying!
 
 ### Step 3: MenuToggle Icon Restructuring
 
@@ -221,7 +240,8 @@ These require **more careful review**:
 
 1. **Find violation:**
    - Konveyor view → "ActionMenu.tsx"
-   - Violation: "MenuToggle icon should use icon prop instead of child"
+   - Violation: **"[Tier 2 ⚠️ Review] MenuToggle icon should use icon prop instead of child"**
+   - Notice the `[Tier 2 ⚠️ Review]` prefix → structural change, review carefully
 
 2. **Generate AI fix:**
    - Click "Get solution"
@@ -300,15 +320,16 @@ Similar pattern to MenuToggle:
 **Aim for 25-30 total fixes** (including Tier 1)
 
 **Moderate complexity (review carefully):**
-- ⚠️ MenuToggle changes - verify icon prop
-- ⚠️ EmptyState changes - test interaction
-- ⚠️ Button icon props - check multiple instances
+- ⚠️ **`[Tier 2 ⚠️ Review]`** MenuToggle changes - verify icon prop
+- ⚠️ **`[Tier 2 ⚠️ Review]`** EmptyState changes - test interaction
+- ⚠️ **`[Tier 2 ⚠️ Review]`** Button icon props - check multiple instances
 
 **Red flags (reject or manual fix):**
 - ❌ AI changes unrelated code
 - ❌ Removes important props
 - ❌ Changes logic, not just structure
 - ❌ Explanation doesn't match diff
+- ❌ You see `[Tier 2]` but the change looks too complex
 
 ### Step 7: Test Thoroughly
 
@@ -359,24 +380,34 @@ git checkout -b tier3-fixes
 
 ### Step 2: Find Tier 3 Violations
 
-**Edge cases requiring human judgment:**
+**⚠️ IMPORTANT - Understanding Tier 3:**
+
+You will **NOT** see violations prefixed with `[Tier 3]`. Instead, you'll see `[Tier 1]` or `[Tier 2]` prefixes in these files:
 
 - `src/components/tier3-edge-cases/CompatibilityLayer.tsx`
 - `src/components/tier3-edge-cases/DynamicComponent.tsx`
 - `src/components/tier3-edge-cases/CustomWrapper.tsx`
-
-**Also check:**
 - `src/pages/StoragePage.tsx` - Contains edge case examples
+
+**The lesson:** Even simple `[Tier 1]` rules require **human judgment** in certain contexts.
+
+**How to identify Tier 3 scenarios:**
+1. File location: `tier3-edge-cases/` directory
+2. Code comments: Look for `IMPORTANT FOR WORKSHOP` comments
+3. Context: Business logic, compatibility layers, dynamic code
 
 ### Step 3: CompatibilityLayer - REJECT AI Fix
 
 **This is a test!** The AI will suggest removing the v5 Text import.
 
 1. **Find violation:**
-   - "Text component renamed to Content"
+   - Open `CompatibilityLayer.tsx` in Konveyor view
+   - You'll see: **"[Tier 1] Imports of Text should reference Content"**
+   - Notice it says `[Tier 1]` → looks like a simple change!
 
 2. **Generate AI fix:**
    - AI will suggest: Remove Text import, use only Content
+   - **But this is WRONG for this context!**
 
 3. **Review the code:**
    ```tsx
@@ -394,24 +425,28 @@ git checkout -b tier3-fixes
 4. **Decision: REJECT ❌**
    - This component intentionally supports both versions
    - Removing Text would break v5 compatibility
-   - **This is the right time to reject AI!**
+   - **Even though it says `[Tier 1]`, you must REJECT this fix!**
 
 5. **What to do:**
    - Click "Reject"
    - Add comment: "Intentional dual support - keeping both imports"
    - Move on
 
-**Key lesson:** AI doesn't understand business context. You do!
+**Key lesson:** The `[Tier 1]` prefix means the **rule** is simple, but **context** determines whether to apply it. AI doesn't understand business context - you do!
 
 ### Step 4: DynamicComponent - Manual Review
 
-**AI struggles with template literals and dynamic imports**
+**AI struggles with template literals and dynamic values**
 
-1. **Find violation:**
-   - Component name constructed with template literals
+1. **Find violations:**
+   - Open `DynamicComponent.tsx` in Konveyor view
+   - You'll see multiple **`[Tier 1]`** and **`[Tier 1 - Bulk CSS]`** violations
+   - They look simple, but the code uses runtime-computed values
 
 2. **Generate AI fix:**
-   - AI may suggest changes that don't account for dynamic behavior
+   - AI will detect the static `Text` import → suggests changing to `Content`
+   - AI will detect CSS classes in template literals → suggests changing patterns
+   - But AI can't trace all possible runtime values!
 
 3. **Review carefully:**
    ```tsx
@@ -553,6 +588,12 @@ Apply fix: Review diff → "Apply"
 Reject fix: "Reject" or "Skip"
 ```
 
+**Tier Prefix Guide:**
+- `[Tier 1]` = Simple change, safe to accept (quick review)
+- `[Tier 1 - Bulk CSS]` = CSS pattern, safe to batch-apply
+- `[Tier 2 ⚠️ Review]` = Structural change, review carefully
+- No `[Tier 3]` prefix = Identified by context (tier3-edge-cases directory)
+
 ### Common File Locations
 
 ```
@@ -648,25 +689,30 @@ When reviewing AI fixes, ask yourself:
 
 ### ✅ High Confidence - ACCEPT
 
+- [ ] Violation shows **`[Tier 1]`** or **`[Tier 1 - Bulk CSS]`** prefix
 - [ ] Simple component rename (1:1 replacement)
 - [ ] Prop rename with no logic change
 - [ ] CSS class/variable update
 - [ ] AI reasoning is clear and specific
 - [ ] Diff matches the explanation
 - [ ] You understand what changed and why
+- [ ] **NOT** in tier3-edge-cases directory
 
 ### ⚠️ Review Carefully - ACCEPT WITH CAUTION
 
+- [ ] Violation shows **`[Tier 2 ⚠️ Review]`** prefix
 - [ ] Structural component changes
 - [ ] Multiple related changes
 - [ ] Icon/children restructuring
 - [ ] AI explanation is detailed
 - [ ] Test immediately after applying
+- [ ] Watch for unintended side effects
 
 ### ❌ Reject or Manual - DO NOT ACCEPT
 
-- [ ] Compatibility layers
-- [ ] Dynamic/computed values
+- [ ] File in `tier3-edge-cases/` directory (even if `[Tier 1]`!)
+- [ ] Compatibility layers (intentional dual support)
+- [ ] Dynamic/computed values (template literals, runtime props)
 - [ ] Complex conditional logic
 - [ ] Public API changes
 - [ ] You don't understand the reasoning
