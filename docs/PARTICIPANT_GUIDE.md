@@ -181,8 +181,8 @@ In Konveyor view, look for violations prefixed with **`🟢 [Tier 1]`** or **`�
 
 1. **Find the violation:**
    - Konveyor view → Expand "UserProfile.tsx"
-   - Click on violation: **"🟢 [Tier 1] Imports of Text should reference Content"**
-   - Notice the `🟢 [Tier 1]` prefix → indicates simple change
+   - Click on violation: **"🟡 [Tier 2] Text component should be replaced with Content component"**
+   - This is Tier 2, but it's straightforward in this context
 
 2. **Generate AI fix:**
    - Click "Get solution"
@@ -211,6 +211,8 @@ In Konveyor view, look for violations prefixed with **`🟢 [Tier 1]`** or **`�
 6. **Verify in editor:**
    - Open `src/components/tier1-simple/UserProfile.tsx`
    - Confirm changes look correct
+
+**📝 Remember this fix!** You'll encounter this **same violation** later in Exercise 3, but you'll need to **reject** it due to different business context. Same rule, different decision!
 
 ### Step 4: Apply More Tier 1 Fixes
 
@@ -463,16 +465,18 @@ You will **NOT** see violations prefixed with `🔴 [Tier 3]`. Instead, you'll s
 
 ### Step 3: CompatibilityLayer - REJECT AI Fix
 
-**This is a test!** The AI will suggest replacing Text with Content.
+**This is a test!** You'll see a familiar violation, but the correct action is different.
 
 1. **Find violation:**
    - Open `CompatibilityLayer.tsx` in Konveyor view
    - You'll see: **"🟡 [Tier 2] Text component should be replaced with Content component"**
-   - Even though it's Tier 2, this looks like a straightforward replacement!
+   - **Wait... you already fixed this in Exercise 1!** You successfully applied this fix in `UserProfile.tsx`
+   - This looks exactly the same → straightforward replacement, right?
 
 2. **Generate AI fix:**
    - AI will suggest: Replace Text with Content throughout
-   - **But this is WRONG for this context!**
+   - Same suggestion as before
+   - **But this time it's WRONG for this context!**
 
 3. **Review the code:**
    ```tsx
@@ -494,14 +498,14 @@ You will **NOT** see violations prefixed with `🔴 [Tier 3]`. Instead, you'll s
    - The comments warn: "DO NOT auto-fix this component"
    - This is intentional compatibility code for gradual migration
    - Replacing Text would break the intended dual-version support
-   - **Even though it's `🟡 [Tier 2]`, you must REJECT this fix!**
+   - **Same violation as Exercise 1, but OPPOSITE decision!**
 
 5. **What to do:**
    - Click "Reject"
    - Add comment: "Intentional dual support - keeping both imports"
    - Move on
 
-**Key lesson:** Even a `🟡 [Tier 2]` rule that looks straightforward requires **context** to apply correctly. AI doesn't understand business context - you do!
+**Key lesson:** The **same violation** can require **different decisions** based on context. In Exercise 1, you correctly applied this fix to `UserProfile.tsx`. Here, you must reject it. The violation message is identical, but the business context is different. AI doesn't understand business context - you do!
 
 ### Step 4: DynamicComponent - Manual Review
 
