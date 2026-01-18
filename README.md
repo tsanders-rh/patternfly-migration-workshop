@@ -73,6 +73,7 @@ This workshop teaches the **three-part pipeline** that makes systematic migratio
 ### The Teaching Moment
 
 **Exercise 1:** Apply "Text → Content" fix to `UserProfile.tsx` ✅
+
 **Exercise 3:** Reject "Text → Content" fix to `CompatibilityLayer.tsx` ❌
 
 **Same violation. Different context. Different decision.**
