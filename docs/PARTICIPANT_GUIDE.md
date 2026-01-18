@@ -164,16 +164,22 @@ git checkout -b tier1-css-fixes
 
 ### Step 2: Find CSS Violations
 
-In Konveyor view, look for violations prefixed with **`🟢 [Tier 1 - Bulk CSS]`**:
+In Konveyor view, look for violations prefixed with **`🟢 [Tier 1 - Bulk CSS]`**.
 
-- **`🟢 [Tier 1 - Bulk CSS]`** CSS class pf-v5-c-* should be pf-v6-c-*
-- **`🟢 [Tier 1 - Bulk CSS]`** CSS class pf-v5-u-* should be pf-v6-u-*
-- **`🟢 [Tier 1 - Bulk CSS]`** CSS variable --pf-v5-global--* should be --pf-t--global--*
+**You should see violations like:**
 
-**Where to find them:**
-- `src/styles/components.css` - Class patterns and variables (~10 violations)
-- `src/styles/tokens.css` - CSS custom properties (~10 violations)
-- `src/components/tier1-simple/PageHeader.css` - Component styles (~7 violations)
+- 🟢 **[Tier 1 - Bulk CSS]** --pf-v5-global-- should be replaced with --pf-t--global--
+- 🟢 **[Tier 1 - Bulk CSS]** --pf-v5-global should be replaced with --pf-v6-global
+- 🟢 **[Tier 1 - Bulk CSS]** pf-v5-c-button should be replaced with pf-v6-c-button
+- 🟢 **[Tier 1 - Bulk CSS]** pf-v5-u-mt-lg should be replaced with pf-v6-u-mt-lg
+- (and more CSS class and variable violations)
+
+Each violation shows how many incidents it found (e.g., "24 incidents").
+
+**Where these violations are located:**
+- `src/styles/components.css` - CSS classes and variables
+- `src/styles/tokens.css` - CSS custom properties
+- `src/components/tier1-simple/PageHeader.css` - Component-specific styles
 
 **Tip:** Use VS Code's filter in Konveyor view to show only "Bulk CSS" violations
 
