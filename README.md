@@ -277,11 +277,16 @@ After completing this workshop, you'll be able to:
 
 ## Documentation
 
+**For Participants:**
 - **[Participant Guide](./docs/PARTICIPANT_GUIDE.md)** - Step-by-step exercises for workshop day
-- **[Workshop Guide](./docs/WORKSHOP_GUIDE.md)** - Facilitator instructions and timing
-- **[Slides](./docs/SLIDES.md)** - Presentation deck with value proposition and ROI
 - **[AI Providers](./docs/AI_PROVIDERS.md)** - Configure OpenAI, Anthropic, Bedrock, or Ollama
 - **[Quick Reference](./docs/QUICK_REFERENCE.md)** - Printable cheat sheet
+
+**For Facilitators:**
+- **[Workshop Guide](./docs/facilitator/WORKSHOP_GUIDE.md)** - Facilitator instructions and timing
+- **[Slides](./docs/facilitator/SLIDES.md)** - Presentation deck with value proposition and ROI
+- **[Meeting Invite](./docs/facilitator/MEETING_INVITE.txt)** - Copy/paste calendar invitation
+- **[Agenda](./docs/facilitator/AGENDA.md)** - Detailed schedule and prerequisites
 
 ---
 

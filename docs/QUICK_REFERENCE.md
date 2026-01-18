@@ -108,7 +108,7 @@ npm run build              # Production build
 
 - Full Guide: `docs/PARTICIPANT_GUIDE.md`
 - AI Setup: `docs/AI_PROVIDERS.md`
-- Workshop Guide: `docs/WORKSHOP_GUIDE.md`
+- Workshop Guide: `docs/facilitator/WORKSHOP_GUIDE.md`
 - Help: Ask facilitator or check Slack
 
 ---

@@ -40,19 +40,37 @@ Use this if you want to use your own AI provider instead of the workshop's share
 
 ## For Facilitators
 
-### [Workshop Guide](./WORKSHOP_GUIDE.md) 🎓
-**Comprehensive facilitator guide** including:
+All facilitator materials are in [./facilitator/](./facilitator/):
 
+### [Workshop Guide](./facilitator/WORKSHOP_GUIDE.md) 🎓
+**Comprehensive facilitator guide** including:
 - Pre-workshop setup checklist
 - Detailed session-by-session schedule (with timing)
 - Live demo instructions
 - Exercise walkthrough with discussion prompts
 - Git branching strategy
 - Troubleshooting common issues
-- Engagement strategies
-- Post-workshop follow-up plan
 
-**Use this to run the workshop.**
+### [Slides](./facilitator/SLIDES.md) 📊
+**Presentation deck** with:
+- Value proposition and ROI messaging
+- Three-part pipeline explanation
+- Workshop structure and expectations
+- Discussion questions
+- Backup slides for common objections
+
+### [Meeting Invite](./facilitator/MEETING_INVITE.txt) 📧
+**Calendar invitation template** - copy/paste format with:
+- Concise agenda and timing
+- Prerequisites checklist
+- Value proposition (time/cost savings)
+
+### [Agenda](./facilitator/AGENDA.md) 📋
+**Detailed workshop agenda** including:
+- Complete schedule with descriptions
+- Full prerequisites and setup instructions
+- Learning objectives
+- Post-workshop action plan
 
 ---
 
@@ -87,7 +105,7 @@ Documentation about the console-style UI design:
 
 **Workshop day?** → [Participant Guide](./PARTICIPANT_GUIDE.md)
 
-**Running the workshop?** → [Workshop Guide](./WORKSHOP_GUIDE.md)
+**Running the workshop?** → [Workshop Guide](./facilitator/WORKSHOP_GUIDE.md)
 
 **Need AI setup?** → [AI Providers](./AI_PROVIDERS.md)
 
@@ -104,8 +122,15 @@ patternfly-migration-workshop/
 │
 ├── docs/                        # 📁 YOU ARE HERE
 │   ├── PARTICIPANT_GUIDE.md     # Day-of exercises
-│   ├── WORKSHOP_GUIDE.md        # Facilitator guide
 │   ├── AI_PROVIDERS.md          # AI configuration
+│   ├── QUICK_REFERENCE.md       # Printable cheat sheet
+│   │
+│   ├── facilitator/             # 📁 Facilitator materials
+│   │   ├── WORKSHOP_GUIDE.md    # Facilitator guide
+│   │   ├── SLIDES.md            # Presentation deck
+│   │   ├── MEETING_INVITE.txt   # Calendar invite template
+│   │   └── AGENDA.md            # Detailed schedule
+│   │
 │   ├── VALIDATION_SUMMARY.md    # Violation validation
 │   ├── VIOLATION_VALIDATION.md  # Detailed validation
 │   └── OPENSHIFT-CONSOLE-THEME.md
