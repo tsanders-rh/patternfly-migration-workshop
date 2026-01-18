@@ -19,9 +19,9 @@ Welcome! This guide will walk you through today's hands-on exercises.
 **How to Identify Tiers:**
 
 Violations in VS Code will be prefixed with colored tier indicators:
-- **🟢 `[Tier 1]`** - Simple changes, safe to auto-apply with quick review
+- **🟢 `🟢 [Tier 1]`** - Simple changes, safe to auto-apply with quick review
 - **🟢 `[Tier 1 - Bulk CSS]`** - CSS pattern updates, safe to batch-apply
-- **🟡 `[Tier 2]`** - Structural changes, review carefully before applying
+- **🟡 `🟡 [Tier 2]`** - Structural changes, review carefully before applying
 - **No tier prefix** - You'll identify Tier 3 by context (see Exercise 3)
 
 ---
@@ -158,14 +158,14 @@ git checkout -b tier1-fixes
 
 ### Step 2: Find Tier 1 Violations
 
-In Konveyor view, look for violations prefixed with **`[Tier 1]`** or **`[Tier 1 - Bulk CSS]`**:
+In Konveyor view, look for violations prefixed with **`🟢 [Tier 1]`** or **`🟢 [Tier 1 - Bulk CSS]`**:
 
-- **`[Tier 1]`** Imports of Text should reference Content
-- **`[Tier 1]`** Chip component should be replaced with Label
-- **`[Tier 1]`** isDisabled prop should be updated to disabled
-- **`[Tier 1 - Bulk CSS]`** CSS class pf-v5-c-* should be pf-v6-c-*
-- **`[Tier 1 - Bulk CSS]`** CSS class pf-v5-u-* should be pf-v6-u-*
-- **`[Tier 1 - Bulk CSS]`** CSS variable --pf-v5-global-* should be --pf-t--global-*
+- **`🟢 [Tier 1]`** Imports of Text should reference Content
+- **`🟢 [Tier 1]`** Chip component should be replaced with Label
+- **`🟢 [Tier 1]`** isDisabled prop should be updated to disabled
+- **`🟢 [Tier 1 - Bulk CSS]`** CSS class pf-v5-c-* should be pf-v6-c-*
+- **`🟢 [Tier 1 - Bulk CSS]`** CSS class pf-v5-u-* should be pf-v6-u-*
+- **`🟢 [Tier 1 - Bulk CSS]`** CSS variable --pf-v5-global-* should be --pf-t--global-*
 
 **Where to find them:**
 - `src/components/tier1-simple/UserProfile.tsx` - Text → Content
@@ -173,7 +173,7 @@ In Konveyor view, look for violations prefixed with **`[Tier 1]`** or **`[Tier 1
 - `src/styles/*.css` - CSS classes and variables
 - `src/pages/ProjectsPage.tsx` - Multiple Tier 1 violations
 
-**Tip:** Use VS Code's filter/search in Konveyor view to show only `[Tier 1]` violations
+**Tip:** Use VS Code's filter/search in Konveyor view to show only `🟢 [Tier 1]` violations
 
 ### Step 3: Apply Your First Fix
 
@@ -181,8 +181,8 @@ In Konveyor view, look for violations prefixed with **`[Tier 1]`** or **`[Tier 1
 
 1. **Find the violation:**
    - Konveyor view → Expand "UserProfile.tsx"
-   - Click on violation: **"[Tier 1] Imports of Text should reference Content"**
-   - Notice the `[Tier 1]` prefix → indicates simple change
+   - Click on violation: **"🟢 [Tier 1] Imports of Text should reference Content"**
+   - Notice the `🟢 [Tier 1]` prefix → indicates simple change
 
 2. **Generate AI fix:**
    - Click "Get solution"
@@ -217,13 +217,13 @@ In Konveyor view, look for violations prefixed with **`[Tier 1]`** or **`[Tier 1
 **Repeat for these violations (aim for 15-20 total):**
 
 **Quick wins (high confidence - accept):**
-- ✅ **`[Tier 1 - Bulk CSS]`** CSS variable updates in `styles/tokens.css`
-- ✅ **`[Tier 1 - Bulk CSS]`** CSS class updates in `styles/components.css`
-- ✅ **`[Tier 1]`** Chip → Label in `StatusBadge.tsx`
-- ✅ **`[Tier 1]`** isDisabled → disabled throughout codebase
+- ✅ **`🟢 [Tier 1 - Bulk CSS]`** CSS variable updates in `styles/tokens.css`
+- ✅ **`🟢 [Tier 1 - Bulk CSS]`** CSS class updates in `styles/components.css`
+- ✅ **`🟢 [Tier 1]`** Chip → Label in `StatusBadge.tsx`
+- ✅ **`🟢 [Tier 1]`** isDisabled → disabled throughout codebase
 
 **What to look for in AI reasoning:**
-- ✅ Violation shows `[Tier 1]` prefix → simple change
+- ✅ Violation shows `🟢 [Tier 1]` prefix → simple change
 - ✅ Clear explanation of the change
 - ✅ Specific line numbers mentioned
 - ✅ "Props remain unchanged" for simple renames
@@ -285,11 +285,11 @@ git checkout -b tier2-fixes
 
 ### Step 2: Find Tier 2 Violations
 
-In Konveyor view, look for violations prefixed with **`[Tier 2 ⚠️ Review]`**:
+In Konveyor view, look for violations prefixed with **`🟡 [Tier 2]`**:
 
-- **`[Tier 2 ⚠️ Review]`** MenuToggle icon should use icon prop instead of child
-- **`[Tier 2 ⚠️ Review]`** EmptyState structure consolidated in v6
-- **`[Tier 2 ⚠️ Review]`** Button icon props restructured
+- **`🟡 [Tier 2]`** MenuToggle icon should use icon prop instead of child
+- **`🟡 [Tier 2]`** EmptyState structure consolidated in v6
+- **`🟡 [Tier 2]`** Button icon props restructured
 
 **Where to find them:**
 - `src/components/tier2-moderate/ActionMenu.tsx` - MenuToggle icon restructuring
@@ -305,8 +305,8 @@ In Konveyor view, look for violations prefixed with **`[Tier 2 ⚠️ Review]`**
 
 1. **Find violation:**
    - Konveyor view → "ActionMenu.tsx"
-   - Violation: **"[Tier 2 ⚠️ Review] MenuToggle icon should use icon prop instead of child"**
-   - Notice the `[Tier 2 ⚠️ Review]` prefix → structural change, review carefully
+   - Violation: **"🟡 [Tier 2] MenuToggle icon should use icon prop instead of child"**
+   - Notice the `🟡 [Tier 2]` prefix → structural change, review carefully
 
 2. **Generate AI fix:**
    - Click "Get solution"
@@ -385,16 +385,16 @@ Similar pattern to MenuToggle:
 **Aim for 25-30 total fixes** (including Tier 1)
 
 **Moderate complexity (review carefully):**
-- ⚠️ **`[Tier 2 ⚠️ Review]`** MenuToggle changes - verify icon prop
-- ⚠️ **`[Tier 2 ⚠️ Review]`** EmptyState changes - test interaction
-- ⚠️ **`[Tier 2 ⚠️ Review]`** Button icon props - check multiple instances
+- ⚠️ **`🟡 [Tier 2]`** MenuToggle changes - verify icon prop
+- ⚠️ **`🟡 [Tier 2]`** EmptyState changes - test interaction
+- ⚠️ **`🟡 [Tier 2]`** Button icon props - check multiple instances
 
 **Red flags (reject or manual fix):**
 - ❌ AI changes unrelated code
 - ❌ Removes important props
 - ❌ Changes logic, not just structure
 - ❌ Explanation doesn't match diff
-- ❌ You see `[Tier 2]` but the change looks too complex
+- ❌ You see `🟡 [Tier 2]` but the change looks too complex
 
 ### Step 7: Test Thoroughly
 
@@ -447,14 +447,14 @@ git checkout -b tier3-fixes
 
 **⚠️ IMPORTANT - Understanding Tier 3:**
 
-You will **NOT** see violations prefixed with `[Tier 3]`. Instead, you'll see `[Tier 1]` or `[Tier 2]` prefixes in these files:
+You will **NOT** see violations prefixed with `🔴 [Tier 3]`. Instead, you'll see `🟢 [Tier 1]` or `🟡 [Tier 2]` prefixes in these files:
 
 - `src/components/tier3-edge-cases/CompatibilityLayer.tsx`
 - `src/components/tier3-edge-cases/DynamicComponent.tsx`
 - `src/components/tier3-edge-cases/CustomWrapper.tsx`
 - `src/pages/StoragePage.tsx` - Contains edge case examples
 
-**The lesson:** Even simple `[Tier 1]` rules require **human judgment** in certain contexts.
+**The lesson:** Even simple `🟢 [Tier 1]` rules require **human judgment** in certain contexts.
 
 **How to identify Tier 3 scenarios:**
 1. File location: `tier3-edge-cases/` directory
@@ -468,7 +468,7 @@ You will **NOT** see violations prefixed with `[Tier 3]`. Instead, you'll see `[
 1. **Find violation:**
    - Open `CompatibilityLayer.tsx` in Konveyor view
    - You'll see: **"[Tier 1] Imports of Text should reference Content"**
-   - Notice it says `[Tier 1]` → looks like a simple change!
+   - Notice it says `🟢 [Tier 1]` → looks like a simple change!
 
 2. **Generate AI fix:**
    - AI will suggest: Remove Text import, use only Content
@@ -490,14 +490,14 @@ You will **NOT** see violations prefixed with `[Tier 3]`. Instead, you'll see `[
 4. **Decision: REJECT ❌**
    - This component intentionally supports both versions
    - Removing Text would break v5 compatibility
-   - **Even though it says `[Tier 1]`, you must REJECT this fix!**
+   - **Even though it says `🟢 [Tier 1]`, you must REJECT this fix!**
 
 5. **What to do:**
    - Click "Reject"
    - Add comment: "Intentional dual support - keeping both imports"
    - Move on
 
-**Key lesson:** The `[Tier 1]` prefix means the **rule** is simple, but **context** determines whether to apply it. AI doesn't understand business context - you do!
+**Key lesson:** The `🟢 [Tier 1]` prefix means the **rule** is simple, but **context** determines whether to apply it. AI doesn't understand business context - you do!
 
 ### Step 4: DynamicComponent - Manual Review
 
@@ -505,7 +505,7 @@ You will **NOT** see violations prefixed with `[Tier 3]`. Instead, you'll see `[
 
 1. **Find violations:**
    - Open `DynamicComponent.tsx` in Konveyor view
-   - You'll see multiple **`[Tier 1]`** and **`[Tier 1 - Bulk CSS]`** violations
+   - You'll see multiple **`🟢 [Tier 1]`** and **`🟢 [Tier 1 - Bulk CSS]`** violations
    - They look simple, but the code uses runtime-computed values
 
 2. **Generate AI fix:**
@@ -654,10 +654,10 @@ Reject fix: "Reject" or "Skip"
 ```
 
 **Tier Prefix Guide:**
-- `[Tier 1]` = Simple change, safe to accept (quick review)
+- `🟢 [Tier 1]` = Simple change, safe to accept (quick review)
 - `[Tier 1 - Bulk CSS]` = CSS pattern, safe to batch-apply
-- `[Tier 2 ⚠️ Review]` = Structural change, review carefully
-- No `[Tier 3]` prefix = Identified by context (tier3-edge-cases directory)
+- `🟡 [Tier 2]` = Structural change, review carefully
+- No `🔴 [Tier 3]` prefix = Identified by context (tier3-edge-cases directory)
 
 ### Common File Locations
 
@@ -754,7 +754,7 @@ When reviewing AI fixes, ask yourself:
 
 ### ✅ High Confidence - ACCEPT
 
-- [ ] Violation shows **`[Tier 1]`** or **`[Tier 1 - Bulk CSS]`** prefix
+- [ ] Violation shows **`🟢 [Tier 1]`** or **`🟢 [Tier 1 - Bulk CSS]`** prefix
 - [ ] Simple component rename (1:1 replacement)
 - [ ] Prop rename with no logic change
 - [ ] CSS class/variable update
@@ -765,7 +765,7 @@ When reviewing AI fixes, ask yourself:
 
 ### ⚠️ Review Carefully - ACCEPT WITH CAUTION
 
-- [ ] Violation shows **`[Tier 2 ⚠️ Review]`** prefix
+- [ ] Violation shows **`🟡 [Tier 2]`** prefix
 - [ ] Structural component changes
 - [ ] Multiple related changes
 - [ ] Icon/children restructuring
@@ -775,7 +775,7 @@ When reviewing AI fixes, ask yourself:
 
 ### ❌ Reject or Manual - DO NOT ACCEPT
 
-- [ ] File in `tier3-edge-cases/` directory (even if `[Tier 1]`!)
+- [ ] File in `tier3-edge-cases/` directory (even if `🟢 [Tier 1]`!)
 - [ ] Compatibility layers (intentional dual support)
 - [ ] Dynamic/computed values (template literals, runtime props)
 - [ ] Complex conditional logic
