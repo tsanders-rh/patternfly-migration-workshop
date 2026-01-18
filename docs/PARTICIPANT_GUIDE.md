@@ -12,8 +12,8 @@ Welcome! This guide will walk you through today's hands-on exercises.
 - Practice incremental migration with git branches
 
 **Three Exercises:**
-- **Exercise 1** (30 min): Tier 1 Bulk CSS - CSS variables only, ultra-safe bulk operations (~48 fixes)
-- **Exercise 2** (45 min): Component + CSS class changes - Tier 1 simple + Tier 2 structural (~100+ fixes)
+- **Exercise 1** (15 min): Tier 1 Bulk CSS - CSS variables only, ultra-safe bulk operations (~48 fixes)
+- **Exercise 2** (60 min): Component + CSS class changes - Tier 1 simple + Tier 2 structural (~100+ fixes)
 - **Exercise 3** (30 min): Tier 3 edge cases - when AI needs your help (~5-10 decisions)
 
 **How to Identify Tiers:**
@@ -146,15 +146,15 @@ For this workshop, the settings.json approach above is simpler and pre-configure
 
 ---
 
-## Exercise 1: Tier 1 - Bulk CSS Variables (30 minutes)
+## Exercise 1: Tier 1 - Bulk CSS Variables (15 minutes)
 
 **Goal**: Build confidence with ultra-safe bulk operations on CSS variables
 
 **Why start with CSS variables?**
 - **Highest AI success rate**: 99% (pure find/replace patterns)
 - **Bulk operations**: Fix 24 violations in one click
-- **Immediate feedback**: Tests still pass, UI looks identical
-- **Builds confidence**: "AI got 48+ fixes correct in 5 minutes!"
+- **Quick wins**: Fix ~48 violations in just 2 bulk operations
+- **Builds confidence**: "AI got 48+ fixes correct in under 10 minutes!"
 
 ### Step 1: Create Your Branch
 
@@ -309,18 +309,19 @@ git commit -s -m "Apply Tier 1 Bulk CSS fixes (v5→v6 prefixes)"
 
 ---
 
-## Exercise 2: Component Changes - Tier 1 & Tier 2 (45 minutes)
+## Exercise 2: Component Changes - Tier 1 & Tier 2 (60 minutes)
 
 **Goal**: Learn to differentiate simple component changes from structural refactoring
 
 **What's different from Exercise 1?**
-- **Exercise 1**: CSS only - ultra-safe, batch-apply
-- **Exercise 2**: React components - requires reading AI reasoning carefully
+- **Exercise 1**: CSS variables only - ultra-safe, 2 bulk operations
+- **Exercise 2**: React components + CSS classes - requires reading AI reasoning carefully
 - **Mix of complexity**: Tier 1 (95% safe) + Tier 2 (85% safe, needs careful review)
+- **Higher volume**: ~100+ fixes vs 48 in Exercise 1
 
-### Part A: Tier 1 Component Changes (20 minutes)
+### Part A: Tier 1 Component Changes (25 minutes)
 
-These are simple component/prop renames - similar confidence to CSS, but affecting TypeScript/React.
+These are simple component/prop renames - similar confidence to CSS variables, but affecting TypeScript/React.
 
 ### Step 1: Create Component Fixes Branch
 
@@ -418,7 +419,7 @@ git commit -s -m "Apply Tier 1 component renames (Text→Content, Chip→Label, 
 
 ---
 
-### Part B: Tier 2 Structural Changes (25 minutes)
+### Part B: Tier 2 Structural Changes (35 minutes)
 
 Now the complexity increases - these require careful review of structural changes.
 
