@@ -105,11 +105,31 @@ Add shared Bedrock credentials to `.vscode/settings.json`:
   "konveyor.ai.bedrock.model": "anthropic.claude-sonnet-4-5-20250929-v1:0",
   "konveyor.ai.bedrock.accessKeyId": "GET_FROM_FACILITATOR",
   "konveyor.ai.bedrock.secretAccessKey": "GET_FROM_FACILITATOR",
-  "konveyor.analyzerPath": "../rulesets/preview/nodejs/patternfly"
+  "konveyor.analyzerPath": "../rulesets/preview/nodejs/patternfly",
+  "konveyor.agentMode": false,
+  "konveyor.autoReveal": true,
+  "konveyor.showInlineDecorations": true
 }
 ```
 
+**Settings explained:**
+- `analyzerPath` - Points to tier-labeled PatternFly rules
+- `agentMode: false` - Manual review mode (you approve each fix)
+- `autoReveal: true` - Automatically opens files with violations
+- `showInlineDecorations: true` - Shows violation markers in code
+
 **Or use your own API key:** See [AI_PROVIDERS.md](./AI_PROVIDERS.md)
+
+**Alternative: Profile Manager UI**
+
+You can also configure via the Konveyor UI:
+1. Open Konveyor Analysis View (sidebar)
+2. Click "Configure GenAI Settings" to set up AI provider
+3. Click "Edit in Profile Manager" to create a PatternFly profile
+4. Set Source: `patternfly-v5`, Target: `patternfly-v6`
+5. Point Custom Rules to `../rulesets/preview/nodejs/patternfly`
+
+For this workshop, the settings.json approach above is simpler and pre-configured.
 
 **6. Run Kai Analysis:**
 

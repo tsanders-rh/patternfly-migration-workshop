@@ -13,9 +13,19 @@ For workshop participants, we provide shared AWS Bedrock access:
   "konveyor.ai.bedrock.region": "us-east-1",
   "konveyor.ai.bedrock.model": "anthropic.claude-sonnet-4-5-20250929-v1:0",
   "konveyor.ai.bedrock.accessKeyId": "SHARED_AT_WORKSHOP",
-  "konveyor.ai.bedrock.secretAccessKey": "SHARED_AT_WORKSHOP"
+  "konveyor.ai.bedrock.secretAccessKey": "SHARED_AT_WORKSHOP",
+  "konveyor.analyzerPath": "../rulesets/preview/nodejs/patternfly",
+  "konveyor.agentMode": false,
+  "konveyor.autoReveal": true,
+  "konveyor.showInlineDecorations": true
 }
 ```
+
+**Additional Settings:**
+- `analyzerPath` - Points to PatternFly v5→v6 rulesets with tier labels
+- `agentMode: false` - Manual review mode (you approve each fix)
+- `autoReveal: true` - Automatically opens files when violations are found
+- `showInlineDecorations: true` - Shows violation markers inline in your code
 
 **Note**: Workshop credentials expire 24 hours after the event.
 
@@ -34,7 +44,11 @@ For workshop participants, we provide shared AWS Bedrock access:
 {
   "konveyor.ai.provider": "openai",
   "konveyor.ai.openai.apiKey": "sk-...",
-  "konveyor.ai.openai.model": "gpt-4o"
+  "konveyor.ai.openai.model": "gpt-4o",
+  "konveyor.analyzerPath": "../rulesets/preview/nodejs/patternfly",
+  "konveyor.agentMode": false,
+  "konveyor.autoReveal": true,
+  "konveyor.showInlineDecorations": true
 }
 ```
 
@@ -58,7 +72,11 @@ For workshop participants, we provide shared AWS Bedrock access:
 {
   "konveyor.ai.provider": "anthropic",
   "konveyor.ai.anthropic.apiKey": "sk-ant-...",
-  "konveyor.ai.anthropic.model": "claude-sonnet-4-5-20250929"
+  "konveyor.ai.anthropic.model": "claude-sonnet-4-5-20250929",
+  "konveyor.analyzerPath": "../rulesets/preview/nodejs/patternfly",
+  "konveyor.agentMode": false,
+  "konveyor.autoReveal": true,
+  "konveyor.showInlineDecorations": true
 }
 ```
 
@@ -97,7 +115,11 @@ ollama serve
 {
   "konveyor.ai.provider": "ollama",
   "konveyor.ai.ollama.endpoint": "http://localhost:11434",
-  "konveyor.ai.ollama.model": "codellama:13b"
+  "konveyor.ai.ollama.model": "codellama:13b",
+  "konveyor.analyzerPath": "../rulesets/preview/nodejs/patternfly",
+  "konveyor.agentMode": false,
+  "konveyor.autoReveal": true,
+  "konveyor.showInlineDecorations": true
 }
 ```
 
@@ -249,3 +271,18 @@ After configuring, test in VS Code:
 - Slack: #workshop-help
 - Documentation: [Konveyor AI Docs](https://konveyor.io/docs)
 - During workshop: Ask facilitators!
+
+---
+
+## Additional Resources
+
+**Blog Post: Automating PatternFly Fixes with Konveyor AI**
+- https://www.migandmod.net/2025/12/10/automating-patternfly-fixes-konveyor-ai/
+- Shows alternative Profile Manager UI configuration approach
+- Detailed workflow and cost analysis ($15-21 for ~3,500 violations)
+- Best practices for batch processing and commit strategies
+
+**Official Konveyor Documentation**
+- https://konveyor.io/konveyor-vscode/
+- VS Code extension marketplace page
+- Latest features and updates
