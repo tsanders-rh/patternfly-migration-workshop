@@ -463,66 +463,80 @@ You will **NOT** see violations prefixed with `🔴 [Tier 3]`. Instead, you'll s
 
 ### Step 3: CompatibilityLayer - REJECT AI Fix
 
-**This is a test!** The AI will suggest removing the v5 Text import.
+**This is a test!** The AI will suggest replacing Text with Content.
 
 1. **Find violation:**
    - Open `CompatibilityLayer.tsx` in Konveyor view
-   - You'll see: **"[Tier 1] Imports of Text should reference Content"**
-   - Notice it says `🟢 [Tier 1]` → looks like a simple change!
+   - You'll see: **"🟡 [Tier 2] Text component should be replaced with Content component"**
+   - Even though it's Tier 2, this looks like a straightforward replacement!
 
 2. **Generate AI fix:**
-   - AI will suggest: Remove Text import, use only Content
+   - AI will suggest: Replace Text with Content throughout
    - **But this is WRONG for this context!**
 
 3. **Review the code:**
    ```tsx
-   // This component INTENTIONALLY supports both v5 and v6
-   import { Text, Content } from '@patternfly/react-core';
+   // This component INTENTIONALLY uses Text for compatibility
+   import { Text } from '@patternfly/react-core';
 
-   export const CompatibilityLayer = ({ version }) => {
-     if (version === 'v5') {
-       return <Text>V5 mode</Text>;
-     }
-     return <Content>V6 mode</Content>;
+   /**
+    * This is a compatibility wrapper to support gradual migration.
+    * DO NOT auto-fix this component - it intentionally uses both old and new APIs.
+    */
+   export const CompatibilityLayer = ({ useV6, children }) => {
+     // In real implementation, would conditionally use Content or Text
+     // For this demo, just use Text to trigger the violation
+     return <Text component="p">{children}</Text>;
    };
    ```
 
 4. **Decision: REJECT ❌**
-   - This component intentionally supports both versions
-   - Removing Text would break v5 compatibility
-   - **Even though it says `🟢 [Tier 1]`, you must REJECT this fix!**
+   - The comments warn: "DO NOT auto-fix this component"
+   - This is intentional compatibility code for gradual migration
+   - Replacing Text would break the intended dual-version support
+   - **Even though it's `🟡 [Tier 2]`, you must REJECT this fix!**
 
 5. **What to do:**
    - Click "Reject"
    - Add comment: "Intentional dual support - keeping both imports"
    - Move on
 
-**Key lesson:** The `🟢 [Tier 1]` prefix means the **rule** is simple, but **context** determines whether to apply it. AI doesn't understand business context - you do!
+**Key lesson:** Even a `🟡 [Tier 2]` rule that looks straightforward requires **context** to apply correctly. AI doesn't understand business context - you do!
 
 ### Step 4: DynamicComponent - Manual Review
 
-**AI struggles with template literals and dynamic values**
+**AI struggles with dynamic values and computed patterns**
 
 1. **Find violations:**
    - Open `DynamicComponent.tsx` in Konveyor view
-   - You'll see multiple **`🟢 [Tier 1]`** and **`🟢 [Tier 1 - Bulk CSS]`** violations
-   - They look simple, but the code uses runtime-computed values
+   - You'll see **`🟡 [Tier 2] Text component should be replaced with Content component`**
+   - Looks straightforward, but the code uses dynamic patterns
 
-2. **Generate AI fix:**
-   - AI will detect the static `Text` import → suggests changing to `Content`
-   - AI will detect CSS classes in template literals → suggests changing patterns
-   - But AI can't trace all possible runtime values!
-
-3. **Review carefully:**
+2. **Review the code:**
    ```tsx
-   const componentName = `pf-v5-c-${type}`;
-   // AI may not safely handle this pattern
+   // Dynamic CSS classes in template literals - may not be detected by rules
+   const baseClass = `pf-v5-c-${componentType}`;
+   const statusClass = `pf-v5-c-${componentType}--${status}`;
+
+   // Text used conditionally
+   const renderContent = () => {
+     if (showDetails) {
+       return <Text component="p">Detailed info...</Text>;
+     }
+     return <Text component="small">Summary view</Text>;
+   };
    ```
 
+3. **The problem:**
+   - CSS classes use template literals with runtime values
+   - `componentType` comes from props → could be anything
+   - AI can fix `Text → Content`, but can't trace all dynamic CSS values
+   - Manual review needed for template literal patterns
+
 4. **Decision:**
-   - If AI fix looks correct → Apply with extra testing
-   - If AI fix looks risky → Flag for manual review
-   - Better safe than sorry!
+   - ✅ Text → Content fix: Probably safe to apply
+   - ⚠️ Any suggested CSS changes in template literals: Review very carefully
+   - 📝 Note: Some patterns require manual migration outside of AI tools
 
 ### Step 5: CustomWrapper - Partial Fix
 
