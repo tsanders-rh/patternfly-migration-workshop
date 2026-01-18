@@ -498,6 +498,160 @@ git commit -s -m "Apply Tier X migration fixes"
 
 ---
 
+## Backup: Why Not Just Use AI?
+
+# "Can't I Just Ask Claude Code to Migrate My App?"
+
+**Prompt-Driven Approach:**
+```
+"Please migrate this codebase from PatternFly v5 to v6"
+```
+
+**Challenges:**
+
+❓ **Completeness Unknown**
+- Did it find everything?
+- How do you verify nothing was missed?
+- "I think I got them all" ≠ certainty
+
+⚠️ **LLM Attention Limits**
+- Might miss violations in files it doesn't read
+- No guarantee of systematic coverage
+- Token limits prevent full codebase scanning
+
+📊 **No Progress Tracking**
+- Can't measure % complete
+- Hard to resume if interrupted
+- Difficult to prioritize work
+
+🔄 **Not Repeatable**
+- Different results each run
+- Hard to scale across projects
+- No codified rules to share
+
+---
+
+## Backup: The Hybrid Advantage
+
+# Static Analysis + AI = Better Together
+
+```
+┌─────────────────────────┐
+│  Static Analysis        │  Finds ALL violations
+│  (Kantra)               │  ✅ Complete
+│                         │  ✅ Precise (no false positives)
+│  🔍 Semantic scanning   │  ✅ Repeatable
+└───────────┬─────────────┘
+            │
+            ▼
+┌─────────────────────────┐
+│  AI Fix Generation      │  Generates intelligent solutions
+│  (Kai)                  │  ✅ Context-aware
+│                         │  ✅ Explains reasoning
+│  🤖 LLM reasoning       │  ✅ Complex refactoring
+└───────────┬─────────────┘
+            │
+            ▼
+┌─────────────────────────┐
+│  Human Judgment         │  Applies business context
+│  (You!)                 │  ✅ Compatibility decisions
+│                         │  ✅ Architecture choices
+│  👤 Final decision      │  ✅ Quality validation
+└─────────────────────────┘
+```
+
+**Why This Works:**
+- Static analysis ensures **nothing is missed**
+- AI provides **intelligent fixes** (not just find/replace)
+- Human provides **business context** AI can't understand
+
+---
+
+## Backup: Static Analysis Precision
+
+# Semantic Analysis vs. Text Matching
+
+**Problem:** Find all `isDisabled` prop usages that need migration
+
+**❌ Text Search (grep/find):**
+```bash
+grep -r "isDisabled" .
+```
+**Result:** 1,247 matches
+- Comments mentioning "isDisabled"
+- String literals: `"Check if isDisabled"`
+- Unrelated variables: `const isDisabled = true`
+- Test mocks and snapshots
+- **88 actual violations** buried in noise
+
+**✅ Semantic Analysis (Kantra):**
+```bash
+kantra analyze --rules patternfly --source v5 --target v6
+```
+**Result:** 88 violations
+- Only PatternFly component props
+- AST-aware (understands React structure)
+- Filters out comments, strings, tests
+- Precise line numbers and context
+- **Zero false positives**
+
+**Time Saved:** Hours of manual filtering → Seconds of accurate results
+
+---
+
+## Backup: Enterprise Scale Example
+
+# Real-World: Migrating 50 Applications
+
+**Scenario:** Enterprise with 50 apps using PatternFly v5
+
+### Claude Code Alone:
+```bash
+# For each app:
+1. Open in Claude Code
+2. Prompt: "Migrate to PatternFly v6"
+3. Hope it finds everything
+4. Test manually
+5. ❓ Is it complete?
+6. Repeat 50 times (inconsistent each time)
+```
+
+**Problems:**
+- No visibility into total scope upfront
+- Can't prioritize apps by effort
+- Inconsistent approach across apps
+- Hard to verify completeness
+- Difficult to track team progress
+
+### Konveyor Approach:
+```bash
+# Step 1: Analyze all apps
+for app in app{1..50}; do
+  kantra analyze --rules patternfly --input $app/
+done
+
+# Step 2: Generate report
+App1: 234 violations → Est. 12 hours
+App2: 89 violations  → Est. 4 hours  ⭐ Start here
+App3: 567 violations → Est. 20 hours
+...
+
+# Step 3: Migrate with AI assistance
+# - Systematic, repeatable
+# - Track: violations fixed / total
+# - Verify: Re-run → 0 violations ✅
+```
+
+**Benefits:**
+- ✅ Know scope upfront (no surprises)
+- ✅ Prioritize by business value + effort
+- ✅ Consistent approach across all apps
+- ✅ Track team progress objectively
+- ✅ Verify completeness (0 violations = done)
+- ✅ Reuse rules/lessons learned
+
+---
+
 ## Backup: Troubleshooting Quick Reference
 
 # Common Issues & Solutions
@@ -603,3 +757,18 @@ git commit -s -m "Apply Tier X migration fixes"
 - Pause after Slide 14 for questions before diving in
 - Use Slide 17 questions throughout exercises, not just at end
 - Reference slide numbers during exercises: "Remember slide 14's decision framework..."
+
+### When to Use Backup Slides
+
+**"Why Not Just Use AI?" slides** - Use if:
+- Someone asks: "Can't we just use Claude/ChatGPT directly?"
+- Need to justify the static analysis component
+- Audience includes decision-makers evaluating tooling options
+- Want to emphasize value of systematic approach
+
+**Best timing:**
+- After Slide 9 (Semantic Analysis) if question comes up
+- During Q&A at end if not covered
+- Include in follow-up materials for stakeholders
+
+**Key message:** Static analysis + AI is more complete, precise, and repeatable than AI alone
