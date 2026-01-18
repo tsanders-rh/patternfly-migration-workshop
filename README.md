@@ -19,9 +19,9 @@ Apply AI fixes → Test → Verify
 0 violations remaining = mathematical certainty
 ```
 
-**Time Savings:** 87% reduction (2-4 weeks → 2-4 days)
-**Cost Savings:** $13,600-19,200 per project | $680K-960K for 50 apps
-**Quality:** Zero missed violations, verified completeness
+- **Time Savings:** 87% reduction (2-4 weeks → 2-4 days)
+- **Cost Savings:** $13,600-19,200 per project | $680K-960K for 50 apps
+- **Quality:** Zero missed violations, verified completeness
 
 ---
 
