@@ -17,25 +17,28 @@ colorlinks: true
 
 # Exercise Git Workflow
 
-**Exercise 1: Tier 1 Fixes**
+**Exercise 1: Bulk CSS (~120 fixes)**
 ```bash
-git checkout -b tier1-fixes
-# ... make fixes ...
-git add -A && git commit -m "Apply Tier 1 fixes"
+git checkout -b tier1-css-fixes
+# ... apply CSS fixes ...
+git add src/styles/ src/components/tier1-simple/PageHeader.css
+git commit -s -m "Apply Tier 1 Bulk CSS fixes"
 ```
 
-**Exercise 2: Tier 2 Fixes**
+**Exercise 2: Components (~25-35 fixes)**
 ```bash
-git checkout -b tier2-fixes
-# ... make fixes ...
-git add -A && git commit -m "Apply Tier 2 fixes"
+git checkout -b tier1-component-fixes
+# Part A: Component renames
+git add . && git commit -s -m "Tier 1 component renames"
+# Part B: Structural changes
+git add . && git commit -s -m "Tier 2 structural changes"
 ```
 
-**Exercise 3: Tier 3 Manual Fixes**
+**Exercise 3: Edge Cases (~5-10 decisions)**
 ```bash
-git checkout -b tier3-fixes
-# ... make fixes ...
-git add -A && git commit -m "Apply Tier 3 manual fixes"
+# Continue on tier1-component-fixes
+# ... manual review and rejections ...
+git add . && git commit -s -m "Tier 3 edge cases"
 ```
 
 # Common Commands
@@ -110,12 +113,13 @@ npm run build          # Production build
 
 # Workshop Goals
 
-✅ Fix ~150+ violations across 3 tiers  
-✅ Learn when to trust AI vs manual review  
-✅ Practice incremental git workflow  
-✅ Understand PatternFly v5→v6 migration patterns
+✅ Fix ~200+ violations across 3 exercises
+✅ Build confidence with CSS bulk fixes (~120, 99% success)
+✅ Learn when to trust AI vs manual review
+✅ Practice incremental git workflow
+✅ Understand complexity tiers: ultra-safe → careful → manual
 
-**Remember:** The goal isn't perfection—it's learning when AI helps and when you need to intervene!
+**Remember:** Ex1 builds confidence (bulk CSS). Ex2 teaches review (components). Ex3 shows when to reject AI!
 
 # Resources
 

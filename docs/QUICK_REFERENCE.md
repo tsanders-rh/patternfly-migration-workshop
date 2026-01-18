@@ -11,28 +11,32 @@
 
 ## Exercise Git Workflow
 
-**Exercise 1: Tier 1**
+**Exercise 1: Tier 1 Bulk CSS**
 ```bash
-git checkout -b tier1-fixes
-# ... make fixes ...
-git add -A
-git commit -m "Apply Tier 1 fixes"
+git checkout -b tier1-css-fixes
+# ... apply ~120 CSS fixes ...
+git add src/styles/ src/components/tier1-simple/PageHeader.css
+git commit -s -m "Apply Tier 1 Bulk CSS fixes (v5→v6 prefixes)"
 ```
 
-**Exercise 2: Tier 2**
+**Exercise 2: Component Changes**
 ```bash
-git checkout -b tier2-fixes
-# ... make fixes ...
-git add -A
-git commit -m "Apply Tier 2 fixes"
+git checkout -b tier1-component-fixes
+# Part A: Tier 1 component renames (~15-20 fixes)
+git add .
+git commit -s -m "Apply Tier 1 component renames (Text→Content, Chip→Label)"
+
+# Part B: Tier 2 structural changes (~10-15 fixes)
+git add .
+git commit -s -m "Apply Tier 2 structural changes (MenuToggle, EmptyState)"
 ```
 
-**Exercise 3: Tier 3**
+**Exercise 3: Edge Cases**
 ```bash
-git checkout -b tier3-fixes
-# ... make fixes ...
-git add -A
-git commit -m "Apply Tier 3 manual fixes"
+# Continue on tier1-component-fixes branch
+# ... manual fixes and rejections ...
+git add .
+git commit -s -m "Handle Tier 3 edge cases (manual review)"
 ```
 
 ---
@@ -115,9 +119,10 @@ npm run build              # Production build
 
 ## Workshop Goals
 
-✅ Fix ~150+ violations across 3 tiers
+✅ Fix ~200+ violations across 3 exercises
+✅ Build confidence with CSS bulk fixes (~120 violations, 99% success)
 ✅ Learn when to trust AI vs manual review
 ✅ Practice incremental git workflow
-✅ Understand PatternFly v5→v6 migration patterns
+✅ Understand complexity tiers: ultra-safe → careful review → manual
 
-**Remember:** The goal isn't perfection - it's learning when AI helps and when you need to intervene!
+**Remember:** Exercise 1 builds confidence with high-volume, ultra-safe fixes. Exercise 2 teaches careful review. Exercise 3 demonstrates when to reject AI suggestions!

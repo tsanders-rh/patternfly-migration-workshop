@@ -7,14 +7,14 @@ Welcome! This guide will walk you through today's hands-on exercises.
 ## Workshop Overview
 
 **What You'll Do Today:**
-- Apply AI-assisted fixes to ~50+ PatternFly v5→v6 violations
+- Apply AI-assisted fixes to ~200+ PatternFly v5→v6 violations
 - Learn when to trust AI vs manual intervention
 - Practice incremental migration with git branches
 
-**Three Tiers:**
-- **Tier 1** (30 min): Simple changes - component renames, props, CSS
-- **Tier 2** (45 min): Moderate complexity - structural refactoring
-- **Tier 3** (30 min): Edge cases - when AI needs your help
+**Three Exercises:**
+- **Exercise 1** (30 min): Tier 1 Bulk CSS - ultra-safe, high-volume (~120 fixes)
+- **Exercise 2** (45 min): Component changes - Tier 1 simple + Tier 2 structural (~25-35 fixes)
+- **Exercise 3** (30 min): Tier 3 edge cases - when AI needs your help (~5-10 decisions)
 
 **How to Identify Tiers:**
 
@@ -146,43 +146,44 @@ For this workshop, the settings.json approach above is simpler and pre-configure
 
 ---
 
-## Exercise 1: Tier 1 - Quick Wins (30 minutes)
+## Exercise 1: Tier 1 - Bulk CSS Fixes (30 minutes)
 
-**Goal**: Apply simple, high-confidence AI fixes
+**Goal**: Build confidence with ultra-safe, high-volume CSS pattern updates
+
+**Why start with CSS?**
+- **Highest AI success rate**: 98-99% (simple find/replace patterns)
+- **Large volume**: ~123 CSS violations to batch-apply
+- **Immediate feedback**: Tests still pass, UI looks identical
+- **Builds confidence**: "AI got 120+ fixes correct in 20 minutes!"
 
 ### Step 1: Create Your Branch
 
 ```bash
-git checkout -b tier1-fixes
+git checkout -b tier1-css-fixes
 ```
 
-### Step 2: Find Tier 1 Violations
+### Step 2: Find CSS Violations
 
-In Konveyor view, look for violations prefixed with **`🟢 [Tier 1]`** or **`🟢 [Tier 1 - Bulk CSS]`**:
+In Konveyor view, look for violations prefixed with **`🟢 [Tier 1 - Bulk CSS]`**:
 
-- **`🟢 [Tier 1]`** Imports of Text should reference Content
-- **`🟢 [Tier 1]`** Chip component should be replaced with Label
-- **`🟢 [Tier 1]`** isDisabled prop should be updated to disabled
 - **`🟢 [Tier 1 - Bulk CSS]`** CSS class pf-v5-c-* should be pf-v6-c-*
 - **`🟢 [Tier 1 - Bulk CSS]`** CSS class pf-v5-u-* should be pf-v6-u-*
-- **`🟢 [Tier 1 - Bulk CSS]`** CSS variable --pf-v5-global-* should be --pf-t--global-*
+- **`🟢 [Tier 1 - Bulk CSS]`** CSS variable --pf-v5-global--* should be --pf-t--global--*
 
 **Where to find them:**
-- `src/components/tier1-simple/UserProfile.tsx` - Text → Content
-- `src/components/tier1-simple/StatusBadge.tsx` - Chip → Label, isDisabled
-- `src/styles/*.css` - CSS classes and variables
-- `src/pages/ProjectsPage.tsx` - Multiple Tier 1 violations
+- `src/styles/components.css` - Class patterns and variables (~10 violations)
+- `src/styles/tokens.css` - CSS custom properties (~10 violations)
+- `src/components/tier1-simple/PageHeader.css` - Component styles (~7 violations)
 
-**Tip:** Use VS Code's filter/search in Konveyor view to show only `🟢 [Tier 1]` violations
+**Tip:** Use VS Code's filter in Konveyor view to show only "Bulk CSS" violations
 
-### Step 3: Apply Your First Fix
+### Step 3: Apply Your First CSS Fix
 
-**Example: Text → Content in UserProfile.tsx**
+**Example: CSS Variable in PageHeader.css**
 
 1. **Find the violation:**
-   - Konveyor view → Expand "UserProfile.tsx"
-   - Click on violation: **"🟡 [Tier 2] Text component should be replaced with Content component"**
-   - This is Tier 2, but it's straightforward in this context
+   - Konveyor view → Expand "PageHeader.css"
+   - Click on violation: **"🟢 [Tier 1 - Bulk CSS] --pf-v5-global-- should be replaced with --pf-t--global--"**
 
 2. **Generate AI fix:**
    - Click "Get solution"
@@ -190,48 +191,44 @@ In Konveyor view, look for violations prefixed with **`🟢 [Tier 1]`** or **`�
 
 3. **Review AI reasoning:**
    ```
-   The Text component was renamed to Content in PatternFly v6.
+   CSS token variables have been updated with new naming conventions.
 
    Changes needed:
-   - Line 3: Update import from 'Text' to 'Content'
-   - Lines 20-22: Replace <Text> with <Content>
-   - Props remain unchanged
+   - Line 2: --pf-v5-global--BackgroundColor--100 → --pf-t--global--BackgroundColor--100
+   - Line 3: --pf-v5-global--spacer--lg → --pf-t--global--spacer--lg
+   - Line 4: --pf-v5-global--BorderColor--100 → --pf-t--global--BorderColor--100
+   (and more...)
    ```
 
 4. **Review the diff:**
-   - Check the proposed changes carefully
-   - Verify import statement update
-   - Verify component usage updates
-   - Make sure nothing unexpected changed
+   - Check the proposed changes
+   - Verify it's only changing CSS variable prefixes
+   - Make sure no actual styling logic changed
 
 5. **Apply the fix:**
-   - If the fix looks good, click "Apply"
-   - If something looks wrong, click "Reject" and flag for manual review
+   - Click "Apply"
+   - This is a safe pattern - just prefix updates
 
 6. **Verify in editor:**
-   - Open `src/components/tier1-simple/UserProfile.tsx`
-   - Confirm changes look correct
+   - Open `src/components/tier1-simple/PageHeader.css`
+   - Confirm all `--pf-v5-global--*` became `--pf-t--global--*`
 
-**📝 Remember this fix!** You'll encounter this **same violation** later in Exercise 3, but you'll need to **reject** it due to different business context. Same rule, different decision!
+### Step 4: Batch Apply CSS Fixes
 
-### Step 4: Apply More Tier 1 Fixes
+**Repeat for all CSS files (aim for 120+ violations):**
 
-**Repeat for these violations (aim for 15-20 total):**
-
-**Quick wins (high confidence - accept):**
-- ✅ **`🟢 [Tier 1 - Bulk CSS]`** CSS variable updates in `styles/tokens.css`
-- ✅ **`🟢 [Tier 1 - Bulk CSS]`** CSS class updates in `styles/components.css`
-- ✅ **`🟢 [Tier 1]`** Chip → Label in `StatusBadge.tsx`
-- ✅ **`🟢 [Tier 1]`** isDisabled → disabled throughout codebase
+**Ultra-safe patterns (auto-apply with quick review):**
+- ✅ **CSS variables**: `--pf-v5-global--*` → `--pf-t--global--*` in all 3 CSS files
+- ✅ **CSS classes**: `pf-v5-c-button` → `pf-v6-c-button` in `components.css`
+- ✅ **CSS utilities**: `pf-v5-u-mt-lg` → `pf-v6-u-mt-lg` in `components.css`
 
 **What to look for in AI reasoning:**
-- ✅ Violation shows `🟢 [Tier 1]` prefix → simple change
-- ✅ Clear explanation of the change
-- ✅ Specific line numbers mentioned
-- ✅ "Props remain unchanged" for simple renames
-- ✅ No complex logic changes
+- ✅ Only changing prefixes/version numbers
+- ✅ No changes to actual values or styling logic
+- ✅ Multiple violations in same file can be batched
+- ✅ Clear before/after examples
 
-### Step 5: Test Your Changes
+### Step 5: Test Your CSS Changes
 
 ```bash
 # Stop dev server if running (Ctrl+C)
@@ -246,46 +243,154 @@ npm run dev
 
 **Manual testing checklist:**
 - Open http://localhost:3000
-- Navigate to "Projects" page
-- Click on StatusBadge components → Should still increment counter
-- Disabled badge should not increment
+- Navigate through all pages
+- **Visual check**: Everything should look IDENTICAL to before
 - No console errors ✅
+- No broken styles ✅
 
-### Step 6: Commit Your Tier 1 Fixes
+**Why do tests still pass?** CSS variable and class name updates don't change functionality - they're just version number changes in the styling system.
+
+### Step 6: Commit Your CSS Fixes
 
 ```bash
-# Review what changed
+# Review what changed (should be CSS files only)
 git status
 git diff
 
 # Commit your work
-git add .
-git commit -s -m "Apply Tier 1 migration fixes (simple renames and props)"
+git add src/styles/ src/components/tier1-simple/PageHeader.css
+git commit -s -m "Apply Tier 1 Bulk CSS fixes (v5→v6 prefixes)"
 ```
 
 ### ✅ Success Criteria - Exercise 1
 
-- [ ] 15-20 AI fixes accepted
+- [ ] ~120+ CSS violations fixed (all `🟢 [Tier 1 - Bulk CSS]`)
 - [ ] All tests pass (`npm test`)
 - [ ] App runs without errors
-- [ ] StatusBadge interactions still work
-- [ ] Changes committed to `tier1-fixes` branch
+- [ ] UI looks identical to before (no visual changes)
+- [ ] Only CSS files modified (no `.tsx` files)
+- [ ] Changes committed to `tier1-css-fixes` branch
 
-**Stuck? Compare with:** `git diff main..tier1-fixes` (or ask facilitator)
+**Key Insight**: You just applied 120+ AI fixes in 20-30 minutes with 99% accuracy. This is the power of complexity classification - knowing which patterns are "auto-apply safe" lets you move fast with confidence.
+
+**Stuck? Compare with:** `git diff main..tier1-css-fixes` (or ask facilitator)
 
 ---
 
-## Exercise 2: Tier 2 - Moderate Complexity (45 minutes)
+## Exercise 2: Component Changes - Tier 1 & Tier 2 (45 minutes)
 
-**Goal**: Apply structural changes with careful review
+**Goal**: Learn to differentiate simple component changes from structural refactoring
 
-### Step 1: Create Tier 2 Branch
+**What's different from Exercise 1?**
+- **Exercise 1**: CSS only - ultra-safe, batch-apply
+- **Exercise 2**: React components - requires reading AI reasoning carefully
+- **Mix of complexity**: Tier 1 (95% safe) + Tier 2 (85% safe, needs careful review)
+
+### Part A: Tier 1 Component Changes (20 minutes)
+
+These are simple component/prop renames - similar confidence to CSS, but affecting TypeScript/React.
+
+### Step 1: Create Component Fixes Branch
 
 ```bash
-git checkout -b tier2-fixes
+git checkout -b tier1-component-fixes
 ```
 
-### Step 2: Find Tier 2 Violations
+### Step 2: Find Tier 1 Component Violations
+
+In Konveyor view, look for violations prefixed with **`🟢 [Tier 1]`** (NOT Bulk CSS):
+
+- **`🟢 [Tier 1]`** Imports of Text should reference Content
+- **`🟢 [Tier 1]`** Chip component should be replaced with Label
+- **`🟢 [Tier 1]`** isDisabled prop should be updated to disabled
+- **`🟢 [Tier 1]`** Text component="p" should use component="paragraph"
+
+**Where to find them:**
+- `src/components/tier1-simple/UserProfile.tsx` - Text → Content
+- `src/components/tier1-simple/StatusBadge.tsx` - Chip → Label, isDisabled → disabled
+- `src/pages/ProjectsPage.tsx` - Multiple simple component violations
+
+### Step 3: Apply Your First Component Fix
+
+**Example: Text → Content in UserProfile.tsx**
+
+1. **Find the violation:**
+   - Konveyor view → Expand "UserProfile.tsx"
+   - Click on violation: **"🟢 [Tier 1] Imports of Text should reference Content"**
+
+2. **Generate AI fix:**
+   - Click "Get solution"
+   - Wait for AI reasoning to appear
+
+3. **Review AI reasoning:**
+   ```
+   The Text component was renamed to Content in PatternFly v6.
+
+   Changes needed:
+   - Line 3: Update import from 'Text' to 'Content'
+   - Lines 19-21: Replace <Text> tags with <Content>
+   - Props remain unchanged (component="h2", component="p", etc.)
+   ```
+
+4. **Review the diff:**
+   - Check the proposed changes carefully
+   - Verify import statement update
+   - Verify all component usages updated
+   - **Important**: Props should remain unchanged for simple renames
+
+5. **Apply the fix:**
+   - Click "Apply"
+
+6. **Verify in editor:**
+   - Open `src/components/tier1-simple/UserProfile.tsx`
+   - Confirm changes look correct
+
+**📝 Remember this fix!** You'll encounter this **same violation** later in Exercise 3 in `CompatibilityLayer.tsx`, but you'll need to **reject** it due to different business context. Same rule, different decision - this is the key lesson!
+
+### Step 4: Apply More Tier 1 Component Fixes
+
+**Repeat for these violations (~15-20 total):**
+
+- ✅ **Text → Content** in UserProfile.tsx and ProjectsPage.tsx
+- ✅ **Chip → Label** in StatusBadge.tsx
+- ✅ **isDisabled → disabled** in StatusBadge.tsx and other components
+- ✅ **component="p" → component="paragraph"** wherever Text is used
+
+**What to look for in AI reasoning:**
+- ✅ Simple find/replace pattern
+- ✅ "Props remain unchanged" or minimal prop changes
+- ✅ No logic restructuring
+- ✅ Clear before/after examples
+
+### Step 5: Test Tier 1 Component Changes
+
+```bash
+npm test
+# All tests should PASS ✅
+
+npm run dev
+```
+
+**Manual testing:**
+- Navigate to Projects page
+- Test StatusBadge interactions (click counter should work)
+- Verify disabled badges don't increment
+- No console errors ✅
+
+### Step 6: Commit Tier 1 Component Fixes
+
+```bash
+git add .
+git commit -s -m "Apply Tier 1 component renames (Text→Content, Chip→Label, props)"
+```
+
+---
+
+### Part B: Tier 2 Structural Changes (25 minutes)
+
+Now the complexity increases - these require careful review of structural changes.
+
+### Step 7: Find Tier 2 Violations
 
 In Konveyor view, look for violations prefixed with **`🟡 [Tier 2]`**:
 
@@ -301,7 +406,7 @@ In Konveyor view, look for violations prefixed with **`🟡 [Tier 2]`**:
 
 **Notice:** The 🟡 yellow circle indicates Tier 2 - structural changes that require careful review before applying!
 
-### Step 3: MenuToggle Icon Restructuring
+### Step 8: MenuToggle Icon Restructuring
 
 **Example: ActionMenu.tsx**
 
@@ -342,7 +447,7 @@ In Konveyor view, look for violations prefixed with **`🟡 [Tier 2]`**:
    - If reasoning makes sense → "Apply"
    - If uncertain → Ask facilitator to review with you
 
-### Step 4: EmptyState Component
+### Step 9: EmptyState Component
 
 **Example: EmptyStateExample.tsx**
 
@@ -368,7 +473,7 @@ In Konveyor view, look for violations prefixed with **`🟡 [Tier 2]`**:
    - Click "Clear filters" button → Should show "Filters cleared!"
    - Wait 2 seconds → Should return to empty state
 
-### Step 5: Button Icon Props
+### Step 10: Button Icon Props
 
 **Example: IconButtons.tsx**
 
@@ -382,7 +487,7 @@ Similar pattern to MenuToggle:
 - onClick handlers preserved
 - Aria labels unchanged
 
-### Step 6: Apply More Tier 2 Fixes
+### Step 11: Apply More Tier 2 Fixes
 
 **Aim for 25-30 total fixes** (including Tier 1)
 
@@ -398,7 +503,7 @@ Similar pattern to MenuToggle:
 - ❌ Explanation doesn't match diff
 - ❌ You see `🟡 [Tier 2]` but the change looks too complex
 
-### Step 7: Test Thoroughly
+### Step 12: Test Thoroughly
 
 ```bash
 # Run tests
@@ -417,21 +522,31 @@ npm run dev
 - EmptyState → "Clear filters" button works
 - No console errors ✅
 
-### Step 8: Commit Your Tier 2 Fixes
+### Step 13: Commit Your Tier 2 Fixes
 
 ```bash
 git add .
-git commit -s -m "Apply Tier 2 migration fixes (structural changes)"
+git commit -s -m "Apply Tier 2 structural changes (MenuToggle, EmptyState, Button icons)"
 ```
 
 ### ✅ Success Criteria - Exercise 2
 
-- [ ] 25-30 total fixes accepted (Tier 1 + Tier 2)
+**Part A (Tier 1 Components):**
+- [ ] ~15-20 component fixes (Text→Content, Chip→Label, props)
+- [ ] Tests pass after Part A
+- [ ] Committed to `tier1-component-fixes` branch
+
+**Part B (Tier 2 Structural):**
+- [ ] ~10-15 structural fixes (MenuToggle, EmptyState, Button icons)
 - [ ] All tests pass
 - [ ] ActionMenu opens correctly
 - [ ] EmptyState button works
 - [ ] IconButtons all functional
-- [ ] Changes committed to `tier2-fixes` branch
+- [ ] Committed to `tier1-component-fixes` branch (same branch, additional commit)
+
+**Total: ~25-35 component fixes** across both parts
+
+**Key Insight**: You learned the difference between Tier 1 (simple renames - 95% confidence) and Tier 2 (structural changes - 85% confidence requiring careful review). Both can be successfully automated, but Tier 2 requires reading AI reasoning thoroughly.
 
 ---
 
