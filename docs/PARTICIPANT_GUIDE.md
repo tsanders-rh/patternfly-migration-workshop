@@ -505,7 +505,30 @@ You will **NOT** see violations prefixed with `🔴 [Tier 3]`. Instead, you'll s
    - Add comment: "Intentional dual support - keeping both imports"
    - Move on
 
-**Key lesson:** The **same violation** can require **different decisions** based on context. In Exercise 1, you correctly applied this fix to `UserProfile.tsx`. Here, you must reject it. The violation message is identical, but the business context is different. AI doesn't understand business context - you do!
+---
+
+### 🎯 **KEY LEARNING MOMENT** 🎯
+
+**The same violation can require different decisions based on context.**
+
+In **Exercise 1**, you saw this violation:
+- ✅ **"🟡 [Tier 2] Text component should be replaced with Content component"**
+- ✅ File: `UserProfile.tsx`
+- ✅ Decision: **APPLY** ← Correct!
+
+In **Exercise 3**, you see the **identical violation**:
+- ⚠️ **"🟡 [Tier 2] Text component should be replaced with Content component"**
+- ⚠️ File: `CompatibilityLayer.tsx`
+- ❌ Decision: **REJECT** ← Correct!
+
+**Why the difference?**
+- Same rule, same AI suggestion
+- Different business context (compatibility layer vs. normal component)
+- The code comments and file location provide the context clues
+
+**The Lesson:** AI provides consistent rules and suggestions. **You** provide context-aware judgment. AI doesn't understand business requirements, intentional compatibility layers, or gradual migration strategies. **That's your job.**
+
+---
 
 ### Step 4: DynamicComponent - Manual Review
 
