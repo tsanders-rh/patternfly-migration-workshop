@@ -494,6 +494,121 @@ git commit -s -m "Apply Tier X migration fixes"
 
 ---
 
+## Slide 21: Your Next Steps
+
+# Take Konveyor Back to Your Team
+
+**🎯 Within 1 Week:**
+```bash
+# Analyze your own PatternFly v5 codebase
+cd your-app/
+kantra analyze --rules patternfly --source v5 --target v6
+
+# Review the results
+# - How many violations?
+# - Which patterns are most common?
+# - What's the estimated effort?
+```
+
+**Action items:**
+- [ ] Run analysis on one real project
+- [ ] Identify top 10 violations by frequency
+- [ ] Migrate one small file (build confidence)
+- [ ] Share results with your team
+
+---
+
+## Slide 22: Scaling Your Success
+
+# From Workshop to Production
+
+**📅 Within 1 Month:**
+- [ ] Migrate a complete feature or page
+- [ ] Measure: Time saved vs. manual estimate
+- [ ] Document patterns that worked well
+- [ ] Identify patterns that needed manual intervention
+- [ ] Share results: "We saved X hours using Konveyor"
+
+**💰 Calculate Your ROI:**
+```
+Violations found: _______
+Time with Konveyor: _______ hours
+Estimated manual time: _______ hours
+Time saved: _______ hours × $___/hour = $_______
+```
+
+**📊 Within 3 Months:**
+- [ ] Migrate production application to PatternFly v6
+- [ ] Track metrics: violations fixed, time saved, bugs prevented
+- [ ] Create internal case study for other teams
+- [ ] Consider custom rules for your organization's patterns
+
+---
+
+## Slide 23: Beyond PatternFly
+
+# Transfer These Skills to Any Migration
+
+**What you learned today applies to:**
+
+**Framework Migrations:**
+- Angular → React conversions
+- Vue 2 → Vue 3 upgrades
+- React 17 → React 18 migrations
+- Any breaking API changes
+
+**Custom Migrations:**
+- Internal framework version upgrades
+- Design system migrations (Material-UI, Ant Design, etc.)
+- ESLint → Biome or other tooling changes
+- Organization-specific code standards
+
+**How to create custom rules:**
+```yaml
+# Your own migration patterns
+- ruleID: your-org-button-migration
+  description: "🟢 [Tier 1] OldButton renamed to NewButton"
+  when:
+    nodejs.referenced:
+      pattern: OldButton
+  message: 'Update OldButton to NewButton...'
+```
+
+**Konveyor is a platform, not just a PatternFly tool.**
+
+---
+
+## Slide 24: Stay Connected
+
+# Join the Konveyor Community
+
+**📚 Documentation & Resources:**
+- Workshop materials: [github.com/tsanders-rh/patternfly-migration-workshop](https://github.com/tsanders-rh/patternfly-migration-workshop)
+- Konveyor docs: [konveyor.io/docs](https://konveyor.io/docs)
+- PatternFly v6 guide: [patternfly.org/get-started/upgrade](https://www.patternfly.org/get-started/upgrade/)
+- Blog series: [Automating UI Migrations](https://www.migandmod.net/2025/10/22/automating-ui-migrations-ai-analyzer-rules/)
+
+**💬 Community Support:**
+- Slack: #konveyor on Kubernetes Slack
+- GitHub Issues: [github.com/konveyor/kai/issues](https://github.com/konveyor/kai/issues)
+- Email: konveyor-community@googlegroups.com
+
+**📣 Share Your Success:**
+- Tweet your migration wins with #Konveyor
+- Blog about your experience
+- Present at team/company tech talks
+- Contribute rules back to the community
+
+**🎁 We Want to Hear From You:**
+- What patterns did you migrate?
+- How much time did you save?
+- What custom rules did you create?
+- What would make Konveyor better?
+
+**Thank you for participating! Now go migrate with confidence.** 🚀
+
+---
+
 # Backup Slides
 
 ---

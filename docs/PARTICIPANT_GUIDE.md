@@ -437,6 +437,31 @@ git commit -s -m "Apply Tier 2 migration fixes (structural changes)"
 
 ## Exercise 3: Tier 3 - Edge Cases (30 minutes)
 
+---
+
+## ⚠️ **SLOW DOWN HERE** ⚠️
+
+**This is the most important 30 minutes of the workshop.**
+
+**Why Tier 3 matters more than Tier 1 or Tier 2:**
+
+Tier 1 taught you: "AI can automate simple patterns" ✅
+Tier 2 taught you: "AI needs careful review for complex changes" ✅
+**Tier 3 teaches you: "When to reject AI entirely - the skill that makes you valuable"** 🎯
+
+**If you're running short on time:**
+- ⏩ Skip some Tier 1 fixes (you get the idea)
+- ⏩ Skip some Tier 2 fixes (you understand the pattern)
+- **⏸️ DO NOT rush through Tier 3** - this is where judgment skills are learned
+
+**The lesson you'll take home:**
+> "Same violation, different context, different decision.
+> AI provides rules. You provide judgment."
+
+This is why Konveyor + human expertise beats AI alone at enterprise scale.
+
+---
+
 **Goal**: Recognize when AI needs your help
 
 ### Step 1: Create Tier 3 Branch
