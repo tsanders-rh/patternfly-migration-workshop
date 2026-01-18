@@ -197,46 +197,67 @@ In Konveyor view, look for violations prefixed with **`🟢 [Tier 1 - Bulk CSS]`
      - (and 20 more...)
    - Each incident has an AI wrench icon on the right
 
-3. **Pick one incident to fix:**
-   - Find `/src/components/tier1-simple/pageheader.css:2` in the list
-   - Click the AI wrench icon next to that incident
+3. **Choose bulk fix or individual fix:**
 
-4. **Generate AI fix:**
-   - Click "Get solution"
-   - Wait for AI reasoning to appear
+   **Option A - Bulk Fix (Recommended for CSS):**
+   - Click the AI wrench icon next to the violation rule title (top level)
+   - Select **"Get solution for 24 incidents"**
+   - Kai will generate fixes for ALL 24 incidents at once
+   - Review the combined diff showing all CSS variable changes
+   - Click "Apply" to fix all 24 violations in one go
+   - ✅ **This is perfect for Tier 1 Bulk CSS!**
 
-5. **Review AI reasoning:**
-   - AI will explain the specific change for that file
+   **Option B - Individual Fix:**
+   - Click the AI wrench icon next to a specific incident (e.g., `pageheader.css:2`)
+   - Select **"Get solution"**
+   - Review and apply that single fix
+   - Repeat for other incidents
+
+4. **Review AI reasoning (for bulk fix):**
+   - AI will explain the pattern being changed
    - Shows before/after for the CSS variable pattern
    - Example: `--pf-v5-global--BackgroundColor--100` → `--pf-t--global--BackgroundColor--100`
+   - Lists all 24 files being modified
 
-6. **Review the diff:**
-   - Check the proposed changes
+5. **Review the diff:**
+   - Check the proposed changes across all files
    - Verify it's only changing CSS variable prefixes
    - Make sure no actual styling logic changed
+   - For bulk fixes, this might be a large diff - scan for any unexpected changes
 
-7. **Apply the fix:**
+6. **Apply the fix:**
    - Click "Apply"
+   - All 24 incidents are fixed in one operation!
    - This is a safe pattern - just prefix updates
 
-8. **Repeat for other incidents:**
-   - You can apply fixes to other incidents in the same violation rule
-   - Or fix all 24 incidents one by one (or Kai may offer to fix multiple)
+### Step 4: Batch Apply Remaining CSS Fixes
 
-### Step 4: Batch Apply CSS Fixes
+**Now use bulk fixes to knock out the remaining ~100+ CSS violations!**
 
-**Repeat for all CSS files (aim for 120+ violations):**
+**For each CSS violation rule, use "Get solution for X incidents":**
 
-**Ultra-safe patterns (auto-apply with quick review):**
-- ✅ **CSS variables**: `--pf-v5-global--*` → `--pf-t--global--*` in all 3 CSS files
-- ✅ **CSS classes**: `pf-v5-c-button` → `pf-v6-c-button` in `components.css`
-- ✅ **CSS utilities**: `pf-v5-u-mt-lg` → `pf-v6-u-mt-lg` in `components.css`
+1. **CSS variables** (`--pf-v5-global--*` → `--pf-t--global--*`):
+   - You just fixed 24 incidents - check if there are more!
+   - Look for related rules with remaining incidents
+   - Bulk fix each rule
 
-**What to look for in AI reasoning:**
+2. **CSS classes** (`pf-v5-c-*` → `pf-v6-c-*`):
+   - Find violations like "pf-v5-c-button should be replaced with pf-v6-c-button"
+   - Use bulk fix to handle all incidents at once
+   - Safe pattern - just version number changes
+
+3. **CSS utilities** (`pf-v5-u-*` → `pf-v6-u-*`):
+   - Find violations like "pf-v5-u-mt-lg should be replaced with pf-v6-u-mt-lg"
+   - Bulk fix these as well
+   - All utility class updates are safe
+
+**What to look for when reviewing bulk fixes:**
 - ✅ Only changing prefixes/version numbers
 - ✅ No changes to actual values or styling logic
-- ✅ Multiple violations in same file can be batched
-- ✅ Clear before/after examples
+- ✅ Scan the diff for any unexpected changes
+- ✅ Clear before/after examples in AI reasoning
+
+**Pro tip:** For Tier 1 Bulk CSS, you can safely use "Get solution for X incidents" without deep review. Just verify the diff shows only prefix changes!
 
 ### Step 5: Test Your CSS Changes
 
