@@ -12,6 +12,16 @@ interface IconButtonsProps {
   onDelete: () => void;
 }
 
+/**
+ * WORKSHOP TIER 2: Moderate Complexity Migration
+ * 
+ * Migration completed:
+ * - Button: Icon as child → icon prop ✅
+ * - All three buttons updated ✅
+ * - isDanger prop stays the same ✅
+ * 
+ * Date: 2026-01-19
+ */
 export const IconButtons: React.FC<IconButtonsProps> = ({
   onAdd,
   onEdit,
@@ -31,24 +41,21 @@ export const IconButtons: React.FC<IconButtonsProps> = ({
           variant="plain"
           onClick={() => handleAction('Added item', onAdd)}
           aria-label="Add"
-        >
-          <PlusCircleIcon />
-        </Button>
+          icon={<PlusCircleIcon />}
+        />
         <Button
           variant="plain"
           onClick={() => handleAction('Edited item', onEdit)}
           aria-label="Edit"
-        >
-          <EditIcon />
-        </Button>
+          icon={<EditIcon />}
+        />
         <Button
           variant="plain"
           onClick={() => handleAction('Deleted item', onDelete)}
           isDanger
           aria-label="Delete"
-        >
-          <TrashIcon />
-        </Button>
+          icon={<TrashIcon />}
+        />
       </div>
 
       {actionLog.length > 0 && (

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   Dropdown,
-  DropdownToggle,
   DropdownItem,
   DropdownList,
   MenuToggle
@@ -14,6 +13,16 @@ interface ActionMenuProps {
   isDisabled?: boolean;
 }
 
+/**
+ * WORKSHOP TIER 2: Moderate Complexity Migration
+ * 
+ * Migration completed:
+ * - Removed DropdownToggle import (deprecated in v6) ✅
+ * - MenuToggle icon: child → icon prop ✅
+ * - isDisabled → isDisabled (stays the same) ✅
+ * 
+ * Date: 2026-01-19
+ */
 export const ActionMenu: React.FC<ActionMenuProps> = ({
   onEdit,
   onDelete,
@@ -39,15 +48,15 @@ export const ActionMenu: React.FC<ActionMenuProps> = ({
       <Dropdown
         isOpen={isOpen}
         onOpenChange={setIsOpen}
-        toggle={
+        toggle={(toggleRef) => (
           <MenuToggle
+            ref={toggleRef}
             variant="plain"
             isDisabled={isDisabled}
             onClick={() => setIsOpen(!isOpen)}
-          >
-            <EllipsisVIcon />
-          </MenuToggle>
-        }
+            icon={<EllipsisVIcon />}
+          />
+        )}
       >
         <DropdownList>
           <DropdownItem onClick={handleEdit}>Edit</DropdownItem>
