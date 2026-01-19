@@ -10,7 +10,6 @@ import {
   MastheadContent,
   Toolbar,
   ToolbarContent,
-  ToolbarGroup,
   ToolbarItem,
   Nav,
   NavList,
@@ -45,17 +44,11 @@ export const App: React.FC = () => {
   const headerToolbar = (
     <Toolbar isFullHeight isStatic>
       <ToolbarContent>
-        <ToolbarGroup
-          variant="icon-button-group"
-          align={{ default: 'alignRight' }}
-          spacer={{ default: 'spacerNone', md: 'spacerMd' }}
-        >
-          <ToolbarItem>
-            <div style={{ color: '#fff', padding: '0 16px' }}>
-              Workshop Demo
-            </div>
-          </ToolbarItem>
-        </ToolbarGroup>
+        <ToolbarItem>
+          <div style={{ color: '#fff', padding: '0 16px', marginLeft: 'auto' }}>
+            Workshop Demo
+          </div>
+        </ToolbarItem>
       </ToolbarContent>
     </Toolbar>
   );
@@ -172,7 +165,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <Page header={header} sidebar={sidebar}>
+    <Page masthead={header} sidebar={sidebar}>
       {renderPage()}
     </Page>
   );

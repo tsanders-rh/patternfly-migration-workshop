@@ -31,7 +31,7 @@ export const WorkloadsPage: React.FC<WorkloadsPageProps> = ({ activeItem }) => {
 
   return (
     <>
-      <PageSection variant="light">
+      <PageSection variant="default">
         <Breadcrumb>
           <BreadcrumbItem to="#">Home</BreadcrumbItem>
           <BreadcrumbItem to="#">Workloads</BreadcrumbItem>
@@ -39,31 +39,31 @@ export const WorkloadsPage: React.FC<WorkloadsPageProps> = ({ activeItem }) => {
             {activeItem === 'pods' ? 'Pods' : 'Deployments'}
           </BreadcrumbItem>
         </Breadcrumb>
-        <Title headingLevel="h1" size="2xl" className="pf-v5-u-mt-md">
+        <Title headingLevel="h1" size="2xl" className="pf-v6-u-mt-md">
           {activeItem === 'pods' ? 'Pods' : 'Deployments'}
         </Title>
-        <p className="pf-v5-u-mt-sm pf-v5-u-color-200">
+        <p className="pf-v6-u-mt-sm pf-v6-u-color-200">
           Tier 2 Migration Patterns: Moderate complexity structural changes
         </p>
       </PageSection>
       <Divider />
       <PageSection>
-        <div className="pf-v5-u-mb-md pf-v5-u-p-sm pf-v5-u-background-color-100" style={{ borderRadius: '4px' }}>
+        <div className="pf-v6-u-mb-md pf-v6-u-p-sm pf-v6-u-background-color-100" style={{ borderRadius: '4px' }}>
           <strong>Interactions logged:</strong> {interactionsCount}
         </div>
 
-        <Card className="pf-v5-u-mb-md">
+        <Card className="pf-v6-u-mb-md">
           <CardBody>
             <Tabs
               activeKey={activeTabKey}
               onSelect={(_event, tabIndex) => setActiveTabKey(tabIndex as number)}
             >
               <Tab eventKey={0} title={<TabTitleText>Details</TabTitleText>}>
-                <div className="pf-v5-u-p-md">
-                  <Title headingLevel="h2" size="lg" className="pf-v5-u-mb-md">
+                <div className="pf-v6-u-p-md">
+                  <Title headingLevel="h2" size="lg" className="pf-v6-u-mb-md">
                     Resource Actions
                   </Title>
-                  <p className="pf-v5-u-mb-md pf-v5-u-font-size-sm pf-v5-u-color-200">
+                  <p className="pf-v6-u-mb-md pf-v6-u-font-size-sm pf-v6-u-color-200">
                     Demonstrates MenuToggle icon restructuring (icon as child → icon prop)
                   </p>
                   <ActionMenu
@@ -73,11 +73,11 @@ export const WorkloadsPage: React.FC<WorkloadsPageProps> = ({ activeItem }) => {
                 </div>
               </Tab>
               <Tab eventKey={1} title={<TabTitleText>Actions</TabTitleText>}>
-                <div className="pf-v5-u-p-md">
-                  <Title headingLevel="h2" size="lg" className="pf-v5-u-mb-md">
+                <div className="pf-v6-u-p-md">
+                  <Title headingLevel="h2" size="lg" className="pf-v6-u-mb-md">
                     Quick Actions
                   </Title>
-                  <p className="pf-v5-u-mb-md pf-v5-u-font-size-sm pf-v5-u-color-200">
+                  <p className="pf-v6-u-mb-md pf-v6-u-font-size-sm pf-v6-u-color-200">
                     Demonstrates Button icon prop migration
                   </p>
                   <IconButtons
@@ -88,11 +88,11 @@ export const WorkloadsPage: React.FC<WorkloadsPageProps> = ({ activeItem }) => {
                 </div>
               </Tab>
               <Tab eventKey={2} title={<TabTitleText>Filters</TabTitleText>}>
-                <div className="pf-v5-u-p-md">
-                  <Title headingLevel="h2" size="lg" className="pf-v5-u-mb-md">
+                <div className="pf-v6-u-p-md">
+                  <Title headingLevel="h2" size="lg" className="pf-v6-u-mb-md">
                     Search Results
                   </Title>
-                  <p className="pf-v5-u-mb-md pf-v5-u-font-size-sm pf-v5-u-color-200">
+                  <p className="pf-v6-u-mb-md pf-v6-u-font-size-sm pf-v6-u-color-200">
                     Demonstrates EmptyState structural changes
                   </p>
                   <EmptyStateExample onAction={handleInteraction} />
@@ -103,11 +103,11 @@ export const WorkloadsPage: React.FC<WorkloadsPageProps> = ({ activeItem }) => {
         </Card>
 
         <div
-          className="pf-v5-u-p-md pf-v5-u-background-color-200"
+          className="pf-v6-u-p-md pf-v6-u-background-color-200"
           style={{ borderRadius: '4px', border: '1px solid #d2d2d2' }}
         >
           <strong>Migration Notes:</strong>
-          <ul className="pf-v5-u-mt-sm pf-v5-u-font-size-sm">
+          <ul className="pf-v6-u-mt-sm pf-v6-u-font-size-sm">
             <li>MenuToggle: Icon as child → icon prop</li>
             <li>Button: Icon component child → icon prop</li>
             <li>EmptyState: Structural component consolidation</li>

@@ -17,26 +17,26 @@ import {
 export const ProjectsPage: React.FC = () => {
   return (
     <>
-      <PageSection variant="light">
+      <PageSection variant="default">
         <Breadcrumb>
           <BreadcrumbItem to="#">Home</BreadcrumbItem>
           <BreadcrumbItem isActive>Projects</BreadcrumbItem>
         </Breadcrumb>
-        <Title headingLevel="h1" size="2xl" className="pf-v5-u-mt-md">
+        <Title headingLevel="h1" size="2xl" className="pf-v6-u-mt-md">
           Projects
         </Title>
-        <p className="pf-v5-u-mt-sm pf-v5-u-color-200">
+        <p className="pf-v6-u-mt-sm pf-v6-u-color-200">
           Tier 1 Migration Patterns: Simple component renames and prop changes
         </p>
       </PageSection>
       <Divider />
       <PageSection>
-        <Card className="pf-v5-u-mb-md">
+        <Card className="pf-v6-u-mb-md">
           <CardBody>
-            <Title headingLevel="h2" size="lg" className="pf-v5-u-mb-md">
+            <Title headingLevel="h2" size="lg" className="pf-v6-u-mb-md">
               Project Members
             </Title>
-            <p className="pf-v5-u-mb-md pf-v5-u-font-size-sm pf-v5-u-color-200">
+            <p className="pf-v6-u-mb-md pf-v6-u-font-size-sm pf-v6-u-color-200">
               Demonstrates Text → Content component migration
             </p>
             <UserProfile
@@ -47,19 +47,19 @@ export const ProjectsPage: React.FC = () => {
           </CardBody>
         </Card>
 
-        <Card className="pf-v5-u-mb-md">
+        <Card className="pf-v6-u-mb-md">
           <CardBody>
-            <Title headingLevel="h2" size="lg" className="pf-v5-u-mb-md">
+            <Title headingLevel="h2" size="lg" className="pf-v6-u-mb-md">
               Project Status
             </Title>
-            <p className="pf-v5-u-mb-md pf-v5-u-font-size-sm pf-v5-u-color-200">
+            <p className="pf-v6-u-mb-md pf-v6-u-font-size-sm pf-v6-u-color-200">
               Demonstrates Chip → Label migration and isDisabled → disabled prop changes
             </p>
             <PageHeader
               title="Component Examples"
               subtitle="PatternFly v5 → v6 Migration"
             />
-            <div className="pf-v5-u-mt-md" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            <div className="pf-v6-u-mt-md" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
               <StatusBadge status="active" isDisabled={false} />
               <StatusBadge status="pending" />
               <StatusBadge status="inactive" isDisabled={true} />
@@ -68,11 +68,11 @@ export const ProjectsPage: React.FC = () => {
         </Card>
 
         <div
-          className="pf-v5-u-p-md pf-v5-u-background-color-200"
+          className="pf-v6-u-p-md pf-v6-u-background-color-200"
           style={{ borderRadius: '4px', border: '1px solid #d2d2d2' }}
         >
           <strong>Migration Notes:</strong>
-          <ul className="pf-v5-u-mt-sm pf-v5-u-font-size-sm">
+          <ul className="pf-v6-u-mt-sm pf-v6-u-font-size-sm">
             <li>Text component → Content component</li>
             <li>Chip component → Label component</li>
             <li>isDisabled prop → disabled prop</li>
