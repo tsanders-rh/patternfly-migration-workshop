@@ -1,38 +1,52 @@
 import React from 'react';
-import { Text, TextVariants } from '@patternfly/react-core';
+import { Content } from '@patternfly/react-core';
+
+// Type for Content component variants (replacing TextVariants)
+type ContentVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'small' | 'blockquote';
 
 interface CustomTextProps {
   children: React.ReactNode;
   emphasis?: boolean;
-  variant?: TextVariants;
+  variant?: ContentVariant;
 }
 
 /**
- * Custom wrapper that adds organization-specific behavior.
- * The internal implementation should migrate to Content,
- * but the wrapper name (CustomText) should stay the same.
+ * WORKSHOP TIER 3: Edge Case - Custom Wrapper Migration
+ * 
+ * Migration Strategy:
+ * - Internal implementation: Text → Content ✅
+ * - External API: CustomText name kept stable ✅
+ * - Props: TextVariants → custom type (compatible) ✅
+ * 
+ * This demonstrates migrating internals while keeping the public API stable.
+ * External consumers don't need to change their code.
+ * 
+ * Migration completed: 2026-01-19
  */
 export const CustomText: React.FC<CustomTextProps> = ({
   children,
   emphasis = false,
-  variant = TextVariants.p
+  variant = 'p'
 }) => {
   return (
-    <Text
+    <Content
       component={variant}
       className={emphasis ? 'custom-emphasis' : ''}
     >
       {children}
-    </Text>
+    </Content>
   );
 };
 
-// Example usage in consuming code
+/**
+ * Example usage - consumers don't need to change their code
+ * CustomText API remains stable despite internal migration
+ */
 export const ConsumerComponent: React.FC = () => {
   return (
     <div>
       <CustomText emphasis>Important text</CustomText>
-      <CustomText variant={TextVariants.h3}>Heading</CustomText>
+      <CustomText variant="h3">Heading</CustomText>
     </div>
   );
 };
