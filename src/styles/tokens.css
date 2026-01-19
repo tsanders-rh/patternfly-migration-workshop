@@ -1,13 +1,19 @@
+/**
+ * WORKSHOP TIER 1: CSS Token Migration
+ * Migration completed: pf-v5-global → pf-v6-global
+ * Date: 2026-01-19
+ */
+
 /* Using CSS custom properties directly for app-specific theming */
 :root {
-  --app-header-bg: var(--pf-v5-global--BackgroundColor--dark-100);
-  --app-text-color: var(--pf-v5-global--Color--100);
-  --app-text-secondary: var(--pf-v5-global--Color--200);
-  --app-border: var(--pf-v5-global--BorderWidth--sm) solid var(--pf-v5-global--BorderColor--100);
-  --app-spacing-sm: var(--pf-v5-global--spacer--sm);
-  --app-spacing-md: var(--pf-v5-global--spacer--md);
-  --app-spacing-lg: var(--pf-v5-global--spacer--lg);
-  --app-radius: var(--pf-v5-global--BorderRadius--sm);
+  --app-header-bg: var(--pf-v6-global--BackgroundColor--dark-100);
+  --app-text-color: var(--pf-v6-global--Color--100);
+  --app-text-secondary: var(--pf-v6-global--Color--200);
+  --app-border: var(--pf-v6-global--BorderWidth--sm) solid var(--pf-v6-global--BorderColor--100);
+  --app-spacing-sm: var(--pf-v6-global--spacer--sm);
+  --app-spacing-md: var(--pf-v6-global--spacer--md);
+  --app-spacing-lg: var(--pf-v6-global--spacer--lg);
+  --app-radius: var(--pf-v6-global--BorderRadius--sm);
 }
 
 /* App-specific component styles using tokens */

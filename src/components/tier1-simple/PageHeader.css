@@ -1,14 +1,20 @@
+/**
+ * WORKSHOP TIER 1: CSS Token Migration
+ * Migration completed: pf-v5-global → pf-v6-global
+ * Date: 2026-01-19
+ */
+
 .page-header {
-  background-color: var(--pf-v5-global--BackgroundColor--100);
-  padding: var(--pf-v5-global--spacer--lg);
-  border-bottom: 1px solid var(--pf-v5-global--BorderColor--100);
+  background-color: var(--pf-v6-global--BackgroundColor--100);
+  padding: var(--pf-v6-global--spacer--lg);
+  border-bottom: 1px solid var(--pf-v6-global--BorderColor--100);
 }
 
 .page-header h1 {
-  color: var(--pf-v5-global--Color--100);
-  margin-bottom: var(--pf-v5-global--spacer--md);
+  color: var(--pf-v6-global--Color--100);
+  margin-bottom: var(--pf-v6-global--spacer--md);
 }
 
 .page-header p {
-  color: var(--pf-v5-global--Color--200);
+  color: var(--pf-v6-global--Color--200);
 }
