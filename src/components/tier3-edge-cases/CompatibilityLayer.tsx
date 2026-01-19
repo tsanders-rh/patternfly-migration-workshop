@@ -31,15 +31,13 @@ interface CompatibilityLayerProps {
  * DO NOT auto-migrate this file in bulk updates.
  */
 export const CompatibilityLayer: React.FC<CompatibilityLayerProps> = ({
-  useV6,
+  useV6: _useV6,
   children
 }) => {
   // In a real implementation, would conditionally use Content or Text based on useV6
   // For this demo, using Content since Text is removed in v6
   // This demonstrates internal migration while keeping external API stable
   
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const _useV6 = useV6; // Acknowledge the prop to avoid linting errors
-  
+  // Note: useV6 prop maintained for API compatibility but not used internally (renamed with _ prefix)
   return <Content component="p">{children}</Content>;
 };
