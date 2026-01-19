@@ -3,40 +3,44 @@
 exports[`UserProfile matches snapshot 1`] = `
 <div>
   <div
-    class="pf-v5-c-card"
+    class="pf-v6-c-card"
     data-ouia-component-id="OUIA-Generated-Card-3"
-    data-ouia-component-type="PF5/Card"
+    data-ouia-component-type="PF6/Card"
     data-ouia-safe="true"
     id=""
   >
     <div
-      class="pf-v5-c-card__body"
+      class="pf-v6-c-card__body"
     >
       <div
-        class="pf-v5-c-content"
+        class="pf-v6-c-content"
+        data-ouia-component-id="OUIA-Generated-Content-9"
+        data-ouia-component-type="PF6/Content"
+        data-ouia-safe="true"
+        data-pf-content="true"
       >
         <h2
-          class=""
-          data-ouia-component-id="OUIA-Generated-Text-7"
-          data-ouia-component-type="PF5/Text"
+          class="pf-v6-c-content--h2"
+          data-ouia-component-id="OUIA-Generated-Content-10"
+          data-ouia-component-type="PF6/Content"
           data-ouia-safe="true"
           data-pf-content="true"
         >
           Snapshot Test
         </h2>
         <p
-          class=""
-          data-ouia-component-id="OUIA-Generated-Text-8"
-          data-ouia-component-type="PF5/Text"
+          class="pf-v6-c-content--p"
+          data-ouia-component-id="OUIA-Generated-Content-11"
+          data-ouia-component-type="PF6/Content"
           data-ouia-safe="true"
           data-pf-content="true"
         >
           QA Engineer
         </p>
         <small
-          class=""
-          data-ouia-component-id="OUIA-Generated-Text-9"
-          data-ouia-component-type="PF5/Text"
+          class="pf-v6-c-content--small"
+          data-ouia-component-id="OUIA-Generated-Content-12"
+          data-ouia-component-type="PF6/Content"
           data-ouia-safe="true"
           data-pf-content="true"
         >

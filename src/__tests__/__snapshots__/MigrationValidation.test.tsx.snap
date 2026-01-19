@@ -3,20 +3,20 @@
 exports[`Migration Validation Suite Visual Regression EmptyStateExample matches snapshot 1`] = `
 <div>
   <div
-    class="pf-v5-c-empty-state"
+    class="pf-v6-c-empty-state"
   >
     <div
-      class="pf-v5-c-empty-state__content"
+      class="pf-v6-c-empty-state__content"
     >
       <div
-        class="pf-v5-c-empty-state__header"
+        class="pf-v6-c-empty-state__header"
       >
         <div
-          class="pf-v5-c-empty-state__icon"
+          class="pf-v6-c-empty-state__icon"
         >
           <svg
             aria-hidden="true"
-            class="pf-v5-svg"
+            class="pf-v6-svg"
             fill="currentColor"
             height="1em"
             role="img"
@@ -29,30 +29,41 @@ exports[`Migration Validation Suite Visual Regression EmptyStateExample matches 
           </svg>
         </div>
         <div
-          class="pf-v5-c-empty-state__title"
+          class="pf-v6-c-empty-state__title"
         >
           <h2
-            class="pf-v5-c-empty-state__title-text"
+            class="pf-v6-c-empty-state__title-text"
           >
             No results found
           </h2>
         </div>
       </div>
       <div
-        class="pf-v5-c-empty-state__body"
+        class="pf-v6-c-empty-state__body"
       >
         Try adjusting your search criteria or filters.
       </div>
-      <button
-        aria-disabled="false"
-        class="pf-v5-c-button pf-m-primary"
-        data-ouia-component-id="OUIA-Generated-Button-primary-3"
-        data-ouia-component-type="PF5/Button"
-        data-ouia-safe="true"
-        type="button"
+      <div
+        class="pf-v6-c-empty-state__footer"
       >
-        Clear filters
-      </button>
+        <div
+          class="pf-v6-c-empty-state__actions"
+        >
+          <button
+            class="pf-v6-c-button pf-m-primary"
+            data-ouia-component-id="OUIA-Generated-Button-primary-3"
+            data-ouia-component-type="PF6/Button"
+            data-ouia-safe="true"
+            type="button"
+          >
+            <span
+              class="pf-v6-c-button__text"
+            >
+              Clear filters
+            </span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -63,23 +74,21 @@ exports[`Migration Validation Suite Visual Regression StatusBadge matches snapsh
   <div
     style="display: inline-flex; align-items: center; gap: 8px;"
   >
-    <div
-      class="pf-v5-c-chip"
-      data-ouia-component-id="OUIA-Generated-Chip-2"
-      data-ouia-component-type="PF5/Chip"
-      data-ouia-safe="true"
+    <span
+      class="pf-v6-c-label pf-m-green pf-m-filled pf-m-compact pf-m-clickable"
+      style="cursor: pointer; opacity: 1;"
     >
-      <span
-        class="pf-v5-c-chip__content"
+      <button
+        class="pf-v6-c-label__content pf-m-clickable"
+        type="button"
       >
         <span
-          class="pf-v5-c-chip__text"
-          id="pf-random-id-1"
+          class="pf-v6-c-label__text"
         >
           active
         </span>
-      </span>
-    </div>
+      </button>
+    </span>
   </div>
 </div>
 `;
@@ -87,40 +96,44 @@ exports[`Migration Validation Suite Visual Regression StatusBadge matches snapsh
 exports[`Migration Validation Suite Visual Regression UserProfile matches snapshot 1`] = `
 <div>
   <div
-    class="pf-v5-c-card"
+    class="pf-v6-c-card"
     data-ouia-component-id="OUIA-Generated-Card-2"
-    data-ouia-component-type="PF5/Card"
+    data-ouia-component-type="PF6/Card"
     data-ouia-safe="true"
     id=""
   >
     <div
-      class="pf-v5-c-card__body"
+      class="pf-v6-c-card__body"
     >
       <div
-        class="pf-v5-c-content"
+        class="pf-v6-c-content"
+        data-ouia-component-id="OUIA-Generated-Content-5"
+        data-ouia-component-type="PF6/Content"
+        data-ouia-safe="true"
+        data-pf-content="true"
       >
         <h2
-          class=""
-          data-ouia-component-id="OUIA-Generated-Text-4"
-          data-ouia-component-type="PF5/Text"
+          class="pf-v6-c-content--h2"
+          data-ouia-component-id="OUIA-Generated-Content-6"
+          data-ouia-component-type="PF6/Content"
           data-ouia-safe="true"
           data-pf-content="true"
         >
           Snap Test
         </h2>
         <p
-          class=""
-          data-ouia-component-id="OUIA-Generated-Text-5"
-          data-ouia-component-type="PF5/Text"
+          class="pf-v6-c-content--p"
+          data-ouia-component-id="OUIA-Generated-Content-7"
+          data-ouia-component-type="PF6/Content"
           data-ouia-safe="true"
           data-pf-content="true"
         >
           Tester
         </p>
         <small
-          class=""
-          data-ouia-component-id="OUIA-Generated-Text-6"
-          data-ouia-component-type="PF5/Text"
+          class="pf-v6-c-content--small"
+          data-ouia-component-id="OUIA-Generated-Content-8"
+          data-ouia-component-type="PF6/Content"
           data-ouia-safe="true"
           data-pf-content="true"
         >
