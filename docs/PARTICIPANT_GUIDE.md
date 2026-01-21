@@ -36,6 +36,9 @@ Violations in VS Code will be prefixed with colored tier indicators:
 # Should be in workshop directory
 cd patternfly-migration-workshop
 
+# Install dependencies
+npm clean-install
+
 # Verify app runs
 npm run dev
 # Open http://localhost:3000 in browser
