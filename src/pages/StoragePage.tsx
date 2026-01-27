@@ -72,7 +72,7 @@ export const StoragePage: React.FC = () => {
                   This component intentionally uses v5 patterns for gradual migration support.
                   Auto-migrating would break backward compatibility.
                 </Alert>
-                <CompatibilityLayer useV6={false}>
+                <CompatibilityLayer>
                   This component maintains dual v5/v6 support for gradual migrations
                 </CompatibilityLayer>
               </CardBody>

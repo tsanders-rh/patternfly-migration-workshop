@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { UserProfile } from '../components/tier1-simple/UserProfile';
 import { StatusBadge } from '../components/tier1-simple/StatusBadge';

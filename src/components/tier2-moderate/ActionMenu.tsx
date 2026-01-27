@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   Dropdown,
-  DropdownToggle,
   DropdownItem,
   DropdownList,
   MenuToggle
@@ -39,15 +38,16 @@ export const ActionMenu: React.FC<ActionMenuProps> = ({
       <Dropdown
         isOpen={isOpen}
         onOpenChange={setIsOpen}
-        toggle={
+        toggle={(toggleRef) => (
           <MenuToggle
+            ref={toggleRef}
             variant="plain"
             isDisabled={isDisabled}
             onClick={() => setIsOpen(!isOpen)}
           >
             <EllipsisVIcon />
           </MenuToggle>
-        }
+        )}
       >
         <DropdownList>
           <DropdownItem onClick={handleEdit}>Edit</DropdownItem>
