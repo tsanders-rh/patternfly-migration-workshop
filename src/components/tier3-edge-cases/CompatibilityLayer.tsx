@@ -3,7 +3,6 @@ import React from 'react';
 import { Text } from '@patternfly/react-core';
 
 interface CompatibilityLayerProps {
-  useV6: boolean;
   children: string;
 }
 
@@ -12,10 +11,10 @@ interface CompatibilityLayerProps {
  * DO NOT auto-fix this component - it intentionally uses both old and new APIs.
  */
 export const CompatibilityLayer: React.FC<CompatibilityLayerProps> = ({
-  useV6,
   children
 }) => {
   // In real implementation, would conditionally use Content or Text
   // For this demo, just use Text to trigger the violation
+  // Note: useV6 parameter removed as it's not currently used
   return <Text component="p">{children}</Text>;
 };
